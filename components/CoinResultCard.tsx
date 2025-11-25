@@ -1,0 +1,172 @@
+"use client";
+
+import React from "react";
+import { DexscreenerCoin } from "@/lib/dexscreener";
+import { useWallet } from "@solana/wallet-adapter-react";
+
+type CoinResultCardProps = {
+    coin: DexscreenerCoin;
+    isMostRelevant?: boolean;
+};
+
+export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
+    const walletContextState = useWallet();
+    const { wallet, connected } = walletContextState;
+
+    // Construct Jupiter Swap URL (fallback)
+    const jupiterUrl = `https://jup.ag/swap/SOL-${coin.baseToken.address}`;
+
+    const launchTerminal = () => {
+        if (!connected || !wallet) {
+            alert("Please connect your wallet first to trade.");
+            return;
+        }
+
+        console.log("Attempting to launch Jupiter Terminal with wallet:", walletContextState);
+
+        if (window.Jupiter) {
+            window.Jupiter.init({
+                endpoint: "https://solana-rpc.publicnode.com",
+                enableWalletPassthrough: true,
+                passthroughWalletContextState: walletContextState,
+                strictTokenList: false,
+                defaultExplorer: "SolanaFM",
+                formProps: {
+                    initialInputMint: "So11111111111111111111111111111111111111112", // SOL
+                    initialOutputMint: coin.baseToken.address,
+                },
+                // Platform Fee Configuration
+                // Uncomment and configure when you have fee accounts set up
+                /*
+                platformFeeAndAccounts: {
+                    feeBps: 50, // 0.5%
+                    feeAccounts: new Map([
+                        ["So11111111111111111111111111111111111111112", "YOUR_SOL_FEE_ACCOUNT_ADDRESS"],
+                        [coin.baseToken.address, "YOUR_TOKEN_FEE_ACCOUNT_ADDRESS"],
+                    ]),
+                },
+                */
+            });
+        } else {
+            window.open(jupiterUrl, "_blank");
+        }
+    };
+
+    const formatCurrency = (val?: number) => {
+        if (val === undefined) return "-";
+        if (val >= 1_000_000_000) return `$${(val / 1_000_000_000).toFixed(2)}B`;
+        if (val >= 1_000_000) return `$${(val / 1_000_000).toFixed(2)}M`;
+        if (val >= 1_000) return `$${(val / 1_000).toFixed(2)}K`;
+        return `$${val.toFixed(2)}`;
+    };
+
+    const formatPrice = (priceStr?: string) => {
+        if (!priceStr) return "$0";
+        const price = parseFloat(priceStr);
+        if (price === 0) return "$0";
+
+        if (price < 0.000001) {
+            return `$${price.toExponential(4)}`;
+        }
+        if (price < 0.01) {
+            return `$${price.toFixed(8).replace(/\.?0+$/, "")}`;
+        }
+        return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    };
+
+    return (
+        <div className={`rounded-xl border p-4 transition-colors ${isMostRelevant ? 'bg-zinc-900/80 border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'bg-zinc-900/60 border-zinc-800 hover:border-zinc-700'}`}>
+            {/* Header */}
+            <div className="flex items-start justify-between mb-4 gap-4">
+                <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                        <h3 className="font-bold text-lg text-zinc-100 truncate">
+                            {coin.baseToken.name}
+                        </h3>
+                        <span className="text-sm text-zinc-400 shrink-0">
+                            {coin.baseToken.symbol}
+                        </span>
+                    </div>
+                    <div className="flex items-center gap-2 mt-1 flex-wrap">
+                        <span className="text-xs font-mono text-zinc-500 bg-zinc-900/50 px-1.5 py-0.5 rounded border border-zinc-800">
+                            {coin.baseToken.address.slice(0, 4)}...
+                            {coin.baseToken.address.slice(-4)}
+                        </span>
+                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-green-900/30 text-green-400 border border-green-900/50">
+                            SOLANA
+                        </span>
+                        {isMostRelevant && (
+                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-purple-900/30 text-purple-400 border border-purple-900/50 flex items-center gap-1 shadow-[0_0_10px_rgba(168,85,247,0.2)]">
+                                💎 Most Relevant
+                            </span>
+                        )}
+                        {coin.isHighestFDV && (
+                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-yellow-900/30 text-yellow-400 border border-yellow-900/50 flex items-center gap-1">
+                                🏆 High Cap
+                            </span>
+                        )}
+                        {coin.isHighestVolume && (
+                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-orange-900/30 text-orange-400 border border-orange-900/50 flex items-center gap-1">
+                                🔥 High Vol
+                            </span>
+                        )}
+                        {coin.matchConfidence !== undefined && (
+                            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 ${coin.matchConfidence >= 8 ? 'bg-emerald-900/30 text-emerald-400 border-emerald-900/50' :
+                                coin.matchConfidence >= 5 ? 'bg-yellow-900/30 text-yellow-400 border-yellow-900/50' :
+                                    'bg-red-900/30 text-red-400 border-red-900/50'
+                                }`}>
+                                Confidence Score: {coin.matchConfidence}
+                            </span>
+                        )}
+                    </div>
+                </div>
+                <div className="text-right shrink-0">
+                    <div className="text-xl font-bold text-zinc-100">
+                        {formatPrice(coin.priceUsd)}
+                    </div>
+                    <div className="text-xs text-zinc-500">Price USD</div>
+                </div>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-3 gap-2 mb-4">
+                <div className="bg-zinc-950/50 rounded p-2 border border-zinc-800/50">
+                    <div className="text-[10px] text-zinc-500 uppercase">24h Vol</div>
+                    <div className="text-sm font-medium text-zinc-200">
+                        {formatCurrency(coin.volume?.h24)}
+                    </div>
+                </div>
+                <div className="bg-zinc-950/50 rounded p-2 border border-zinc-800/50">
+                    <div className="text-[10px] text-zinc-500 uppercase">Liquidity</div>
+                    <div className="text-sm font-medium text-zinc-200">
+                        {formatCurrency(coin.liquidity?.usd)}
+                    </div>
+                </div>
+                <div className="bg-zinc-950/50 rounded p-2 border border-zinc-800/50">
+                    <div className="text-[10px] text-zinc-500 uppercase">FDV</div>
+                    <div className="text-sm font-medium text-zinc-200">
+                        {formatCurrency(coin.fdv)}
+                    </div>
+                </div>
+            </div>
+
+            {/* Actions */}
+            <div className="grid grid-cols-2 gap-3">
+                <a
+                    href={coin.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-sm font-medium text-zinc-200 transition-colors border border-zinc-700"
+                >
+                    Dexscreener ↗
+                </a>
+                <button
+                    onClick={launchTerminal}
+                    className="flex items-center justify-center px-4 py-2 rounded-lg bg-[#19C2A1] hover:bg-[#15A88C] text-sm font-bold text-white transition-colors shadow-[0_0_15px_rgba(25,194,161,0.2)]"
+                >
+                    Trade on Jupiter
+                </button>
+            </div>
+        </div>
+    );
+}
