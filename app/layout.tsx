@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Find Solana tokens from TikTok and Instagram Reels.",
 };
 
+import { Analytics } from "@vercel/analytics/react";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,6 +24,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-zinc-950 text-zinc-100 min-h-screen antialiased selection:bg-green-500/30 selection:text-green-200`}>
         <AppWalletProvider>{children}</AppWalletProvider>
         <Script src="https://terminal.jup.ag/main-v4.js" strategy="afterInteractive" />
+        <Analytics />
       </body>
     </html>
   );

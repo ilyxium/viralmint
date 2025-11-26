@@ -95,6 +95,19 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
                         <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-green-900/30 text-green-400 border border-green-900/50">
                             SOLANA
                         </span>
+
+                        {/* DEX Badge */}
+                        {coin.dexId && (
+                            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 uppercase ${coin.dexId === 'raydium' ? 'bg-blue-900/30 text-blue-400 border-blue-900/50' :
+                                    coin.dexId === 'pump' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-900/50' :
+                                        coin.dexId === 'orca' ? 'bg-yellow-900/30 text-yellow-400 border-yellow-900/50' :
+                                            coin.dexId === 'meteora' ? 'bg-pink-900/30 text-pink-400 border-pink-900/50' :
+                                                'bg-zinc-800 text-zinc-400 border-zinc-700'
+                                }`}>
+                                {coin.dexId === 'pump' ? 'Pump.fun' : coin.dexId}
+                            </span>
+                        )}
+
                         {isMostRelevant && (
                             <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-purple-900/30 text-purple-400 border border-purple-900/50 flex items-center gap-1 shadow-[0_0_10px_rgba(168,85,247,0.2)]">
                                 💎 Most Relevant

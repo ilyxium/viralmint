@@ -75,13 +75,21 @@ export async function searchSolanaByQuery(query: string): Promise<DexscreenerCoi
 
         // Sort by relevance:
         // 1. Exact symbol match
-        // 2. FDV descending (Prioritize "real" coins over high-volume noise if exact match is same)
+        // 2. Pump.fun (User preference)
+        // 3. FDV descending
         coins.sort((a, b) => {
             const aExact = a.baseToken.symbol.toLowerCase() === query.toLowerCase();
             const bExact = b.baseToken.symbol.toLowerCase() === query.toLowerCase();
 
             if (aExact && !bExact) return -1;
             if (!aExact && bExact) return 1;
+
+            // Prioritize Pump.fun
+            const aIsPump = a.dexId === 'pump';
+            const bIsPump = b.dexId === 'pump';
+
+            if (aIsPump && !bIsPump) return -1;
+            if (!aIsPump && bIsPump) return 1;
 
             return (b.fdv || 0) - (a.fdv || 0);
         });
