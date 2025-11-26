@@ -321,6 +321,15 @@ export default function Home() {
           </div>
         )}
       </main>
+
+      <footer className="w-full max-w-5xl mx-auto p-6 text-center text-zinc-600 text-xs">
+        <p className="mb-2">
+          &copy; {new Date().getFullYear()} ViralMint. Not financial advice.
+        </p>
+        <p>
+          Trading cryptocurrencies carries a high level of risk. Do your own research.
+        </p>
+      </footer>
     </div>
   );
 }

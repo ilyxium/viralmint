@@ -36,16 +36,12 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
                     initialOutputMint: coin.baseToken.address,
                 },
                 // Platform Fee Configuration
-                // Uncomment and configure when you have fee accounts set up
-                /*
-                platformFeeAndAccounts: {
-                    feeBps: 50, // 0.5%
+                platformFeeAndAccounts: process.env.NEXT_PUBLIC_FEE_ACCOUNT_SOL ? {
+                    feeBps: Number(process.env.NEXT_PUBLIC_JUPITER_FEE_BPS) || 0,
                     feeAccounts: new Map([
-                        ["So11111111111111111111111111111111111111112", "YOUR_SOL_FEE_ACCOUNT_ADDRESS"],
-                        [coin.baseToken.address, "YOUR_TOKEN_FEE_ACCOUNT_ADDRESS"],
+                        ["So11111111111111111111111111111111111111112", process.env.NEXT_PUBLIC_FEE_ACCOUNT_SOL],
                     ]),
-                },
-                */
+                } : undefined,
             });
         } else {
             window.open(jupiterUrl, "_blank");
@@ -99,10 +95,10 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
                         {/* DEX Badge */}
                         {coin.dexId && (
                             <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 uppercase ${coin.dexId === 'raydium' ? 'bg-blue-900/30 text-blue-400 border-blue-900/50' :
-                                    coin.dexId === 'pump' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-900/50' :
-                                        coin.dexId === 'orca' ? 'bg-yellow-900/30 text-yellow-400 border-yellow-900/50' :
-                                            coin.dexId === 'meteora' ? 'bg-pink-900/30 text-pink-400 border-pink-900/50' :
-                                                'bg-zinc-800 text-zinc-400 border-zinc-700'
+                                coin.dexId === 'pump' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-900/50' :
+                                    coin.dexId === 'orca' ? 'bg-yellow-900/30 text-yellow-400 border-yellow-900/50' :
+                                        coin.dexId === 'meteora' ? 'bg-pink-900/30 text-pink-400 border-pink-900/50' :
+                                            'bg-zinc-800 text-zinc-400 border-zinc-700'
                                 }`}>
                                 {coin.dexId === 'pump' ? 'Pump.fun' : coin.dexId}
                             </span>
