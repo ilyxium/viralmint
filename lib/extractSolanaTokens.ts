@@ -146,18 +146,47 @@ export function extractSolanaCandidates(text: string): CoinCandidate[] {
     // 5. Extract Capitalized Words (Low Confidence: 2) & N-Grams
     const words = text.split(/\s+/);
 
+    // Detect "Shouting Sequences" (3+ Uppercase words in a row)
+    // If a word is part of a shouting sequence, we downgrade it.
+    const shoutingIndices = new Set<number>();
+    let sequenceStart = -1;
+    for (let i = 0; i < words.length; i++) {
+        const clean = words[i].replace(/[^a-zA-Z0-9]/g, "");
+
+        // Skip symbols/punctuation in sequence detection
+        if (clean.length === 0) continue;
+
+        const isCap = /^[A-Z0-9]+$/.test(clean) && clean.length > 1 && !/^[0-9]+$/.test(clean);
+
+        if (isCap) {
+            if (sequenceStart === -1) sequenceStart = i;
+        } else {
+            if (sequenceStart !== -1) {
+                if (i - sequenceStart >= 3) {
+                    for (let k = sequenceStart; k < i; k++) shoutingIndices.add(k);
+                }
+                sequenceStart = -1;
+            }
+        }
+    }
+    // Handle sequence at the end
+    if (sequenceStart !== -1 && words.length - sequenceStart >= 3) {
+        for (let k = sequenceStart; k < words.length; k++) shoutingIndices.add(k);
+    }
+
     // HARD BLOCK: Never search for these. Pure noise.
     const HARD_BLOCK = new Set([
         "THE", "AND", "FOR", "BUT", "NOT", "YES", "YOU", "ARE", "CAN", "SEE", "NEW", "NOW", "BUY", "SELL", "SOL", "USD", "USDC", "USDT",
         "VIDEO", "CAPTION", "INSTAGRAM", "TIKTOK", "POST", "COMMENT", "SHARE", "FOLLOW", "SUBSCRIBE", "PROFILE", "ACCOUNT", "MY", "YOUR", "HIS", "HER", "ITS", "OUR", "THEIR",
         "THIS", "THAT", "WHAT", "WHY", "HOW", "WHO", "WHEN", "WHERE", "WHICH", "JUST", "MAKE", "MADE", "LIKE",
-        "WATCH", "DISCOVER", "VISIT", "TRENDING", "CONTENT", "VIDEOS" // Generic TikTok/Instagram terms
+        "WATCH", "DISCOVER", "VISIT", "TRENDING", "CONTENT", "VIDEOS", // Generic TikTok/Instagram terms
+        "FROM", "TO", "WITH", "WILL", "TURN", "TOUCH", "IN", "ON", "AT", "BY", "OF", "OFF", "UP", "DOWN", // Prepositions & Verbs
+        "JOIN", "NOTHING", "STYLE", "FASHION", "HAND", "BEATS", "FIT", "FITS", "BLEND", "COMFORT", "PERFECT" // Common words from debug session
     ]);
 
     // SOFT BLOCK: Search, but require EXACT SYMBOL MATCH + HIGH LIQUIDITY.
     // These are common words that *could* be tokens (e.g. "Time", "Life", "Lock").
     const SOFT_BLOCK = new Set([
-        "IN", // Moved from Hard Block to allow "Lock In"
         "TIME", "YEAR", "PEOPLE", "WAY", "DAY", "MAN", "THING", "WOMAN", "LIFE", "CHILD", "WORLD", "SCHOOL", "STATE", "FAMILY", "STUDENT", "GROUP", "COUNTRY", "PROBLEM", "HAND", "PART", "PLACE", "CASE", "WEEK", "COMPANY", "SYSTEM", "PROGRAM", "QUESTION", "WORK", "GOVERNMENT", "NUMBER", "NIGHT", "POINT", "HOME", "WATER", "ROOM", "MOTHER", "AREA", "MONEY", "STORY", "FACT", "MONTH", "LOT", "RIGHT", "STUDY", "BOOK", "EYE", "JOB", "WORD", "BUSINESS", "ISSUE", "SIDE", "KIND", "HEAD", "HOUSE", "SERVICE", "FRIEND", "FATHER", "POWER", "HOUR", "GAME", "LINE", "END", "MEMBER", "LAW", "CAR", "CITY", "COMMUNITY", "NAME", "PRESIDENT", "TEAM", "MINUTE", "IDEA", "KID", "BODY", "INFORMATION", "BACK", "PARENT", "FACE", "OTHERS", "LEVEL", "OFFICE", "DOOR", "HEALTH", "PERSON", "ART", "WAR", "HISTORY", "PARTY", "RESULT", "CHANGE", "CHANGED", "MORNING", "REASON", "RESEARCH", "GIRL", "GUY", "MOMENT", "AIR", "TEACHER", "FORCE", "EDUCATION",
         "MOVEMENT", "GOOD", "BAD", "GREAT", "BEST", "REAL", "FAKE", "TRUE", "FALSE", "LEFT", "UP", "DOWN", "HIGH", "LOW", "BIG", "SMALL", "LONG", "SHORT", "OLD", "YOUNG", "FIRST", "LAST", "NEXT", "PREVIOUS", "SAME", "DIFFERENT", "OWN", "OTHER", "ANOTHER", "SUCH", "MANY", "MUCH", "MORE", "MOST", "FEW", "LESS", "LEAST", "ALL", "ANY", "SOME", "NO", "NONE", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN"
     ]);
@@ -171,6 +200,16 @@ export function extractSolanaCandidates(text: string): CoinCandidate[] {
         if (clean.length < 2) continue;
         if (clean.length === 2 && !/^[0-9]+$/.test(clean) && !/^[A-Z]+$/.test(clean)) continue;
 
+        // Filter out Metrics (e.g. 37M, 22K, 1.5B)
+        if (/^\d+(\.\d+)?[MK]$/.test(clean)) continue;
+
+        // Filter out Dates (Months, Years, Full Dates)
+        const MONTHS = new Set(["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER", "JAN", "FEB", "MAR", "APR", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]);
+        if (MONTHS.has(clean.toUpperCase())) continue;
+        // Year check (1990-2030) - strict check to avoid blocking "2025" if it's part of a coin name, but here we are checking single words.
+        // Actually, "2025" is likely a year in most contexts. Let's block standalone years.
+        if (/^(19|20)\d{2}$/.test(clean)) continue;
+
         // Check for All Caps or Title Case
         const isAllCaps = /^[A-Z0-9]+$/.test(clean);
         const isTitleCase = /^[A-Z][a-z]+$/.test(clean);
@@ -179,6 +218,11 @@ export function extractSolanaCandidates(text: string): CoinCandidate[] {
         if (isAllCaps || isTitleCase || isNumber) {
             let confidence = isAllCaps ? 3 : 2;
             if (isNumber) confidence = 4; // High confidence for explicit numbers like "67" in a meme context
+
+            // Downgrade confidence if shouting
+            if (shoutingIndices.has(i) && isAllCaps && !isNumber) {
+                confidence = 0.5; // Treat as Soft Block (Strict Filter)
+            }
 
             const upperClean = clean.toUpperCase();
 
@@ -291,10 +335,41 @@ export function extractSolanaCandidates(text: string): CoinCandidate[] {
         });
     }
 
+    // Filter candidates against HARD_BLOCK (Double check for Smart Extract and others)
+    for (const [key, candidate] of candidates) {
+        const upper = candidate.normalized.toUpperCase();
+        // Check single words
+        if (HARD_BLOCK.has(upper)) {
+            candidates.delete(key);
+            continue;
+        }
+        // Check words within phrases
+        const parts = upper.split(/[\s-]+/);
+        if (parts.some(p => HARD_BLOCK.has(p))) {
+            // If a phrase contains a hard blocked word, we should probably be careful.
+            // For now, let's just delete it if it's a "smart" candidate or low confidence
+            if (candidate.confidence < 5) {
+                candidates.delete(key);
+                continue;
+            }
+        }
+
+        // Check for Date Phrases (e.g. "November 26", "November 26 2025")
+        const MONTHS = new Set(["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER", "JAN", "FEB", "MAR", "APR", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]);
+        const hasMonth = parts.some(p => MONTHS.has(p));
+        const hasYear = parts.some(p => /^(19|20)\d{2}$/.test(p));
+        const hasDay = parts.some(p => /^\d{1,2}$/.test(p));
+
+        if (hasMonth && (hasDay || hasYear)) {
+            candidates.delete(key);
+            continue;
+        }
+    }
+
     // 7. Fallback: Lowercase N-Grams (2-3 words)
-    // If we haven't found any strong signals, try to find common phrases even if lowercase.
+    // If we haven't found any strong signals (Conf >= 5), try to find common phrases even if lowercase.
     // e.g. "quarter zip", "chill guy"
-    const hasStrongCandidates = Array.from(candidates.values()).some(c => c.confidence >= 3);
+    const hasStrongCandidates = Array.from(candidates.values()).some(c => c.confidence >= 5);
     if (!hasStrongCandidates) {
         const lowerWords = text.toLowerCase().split(/\s+/);
         for (let i = 0; i < lowerWords.length - 1; i++) {

@@ -10,8 +10,8 @@ export function normalizeText(text: string, authorName?: string): string {
             authorName.replace(/\s+/g, ""), // No spaces
         ];
 
-        // Also split by spaces and remove individual parts if they are significant (len > 2)
-        const parts = authorName.split(/\s+/).filter(p => p.length > 2);
+        // Also split by spaces, underscores, and dots, and remove individual parts if they are significant (len > 2)
+        const parts = authorName.split(/[\s_\.]+/).filter(p => p.length > 2);
         variations.push(...parts);
 
         // Remove duplicates
@@ -28,8 +28,8 @@ export function normalizeText(text: string, authorName?: string): string {
         }
     }
 
-    // 2. Normalize Whitespace
-    cleanText = cleanText.replace(/\s+/g, " ").trim();
+    // 2. Normalize Whitespace and Hyphens
+    cleanText = cleanText.replace(/-/g, " ").replace(/\s+/g, " ").trim();
 
     return cleanText;
 }

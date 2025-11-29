@@ -163,11 +163,22 @@ export async function POST(req: NextRequest) {
                 if (!authorName) {
                     const titleMatch = ogTitle.match(/^(.+?) \(@/);
                     if (titleMatch) authorName = titleMatch[1];
+
+                    // Handle "TikTok · Author Name" format
+                    if (!authorName && ogTitle.startsWith("TikTok · ")) {
+                        authorName = ogTitle.replace("TikTok · ", "").trim();
+                    }
                 }
             } else if (parsed.platform === "instagram") {
                 // Instagram often puts author in title "Author (@handle) • Instagram photos..."
                 const titleMatch = ogTitle.match(/^(.+?) \(@/);
-                if (titleMatch) authorName = titleMatch[1];
+                if (titleMatch) {
+                    authorName = titleMatch[1];
+                } else {
+                    // Try "Name on Instagram" format
+                    const altMatch = ogTitle.match(/^(.+?) on Instagram/);
+                    if (altMatch) authorName = altMatch[1];
+                }
             }
         }
 
