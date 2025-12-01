@@ -106,8 +106,8 @@ export default function Home() {
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-8 max-w-4xl mx-auto">
       <header className="w-full max-w-5xl mx-auto p-4 flex items-center justify-between">
         <div className="flex flex-col">
-          <h1 className="text-4xl font-black tracking-tighter bg-gradient-to-r from-green-400 to-emerald-600 bg-clip-text text-transparent">
-            viralmint
+          <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-600">
+            ViralScan
           </h1>
           <div className="flex items-center gap-3">
             <p className="text-zinc-500 font-medium">Solana Edition</p>
@@ -322,7 +322,7 @@ export default function Home() {
 
       <footer className="w-full max-w-5xl mx-auto p-6 text-center text-zinc-600 text-xs">
         <p className="mb-2">
-          &copy; {new Date().getFullYear()} ViralMint. Not financial advice.
+          &copy; {new Date().getFullYear()} ViralScan. Not financial advice.
         </p>
         <p>
           Trading cryptocurrencies carries a high level of risk. Do your own research.

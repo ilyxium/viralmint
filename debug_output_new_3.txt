@@ -1,0 +1,169 @@
+=== STARTING DEBUG EXTRACTION FOR MULTIPLE URLS ===
+
+
+
+================================================================================
+PROCESSING URL: https://www.tiktok.com/t/ZP8U6Vm4t/
+================================================================================
+Target URL: https://www.tiktok.com/t/ZP8U6Vm4t/
+
+--- Step 1: Parse URL ---
+Parsed: {
+  "platform": "tiktok",
+  "normalizedUrl": "https://www.tiktok.com/t/ZP8U6Vm4t/",
+  "isValid": true
+}
+
+--- Step 2: Fetch HTML ---
+Fetched HTML length: 12620
+
+--- Step 3: Extract Metadata ---
+Raw Title: TikTok · ABC News Live
+Raw Description: 54.8K likes, 615 comments. ““I’m a quarter-zip dude now!” 21-year-old social media influencer @whois.jason is inspiring his followers to dress for success and expand their horizons.”
+Extracted Author: ABC News Live
+
+--- Step 4: Language Processing ---
+Detected Language: english
+
+--- Step 5: Normalize Text ---
+Cleaned Text: TikTok · 54.8K likes, 615 comments. ““I’m a quarter zip dude now!” 21 year old social media influencer @whois.jason is inspiring his followers to dress for success and expand their horizons.”
+
+--- Step 6: Extract Candidates ---
+Found 12 candidates:
+- [4] 615 (Source: name, Raw: "615")
+- [4] 21 (Source: name, Raw: "21")
+- [1.5] 615 comments (Source: name, Raw: "615 comments")
+- [1] a quarter zip dude (Source: name, Raw: "a quarter zip dude")
+- [1.5] 548k likes (Source: name, Raw: "548k likes")
+- [1.5] 548k likes 615 (Source: name, Raw: "548k likes 615")
+- [1.5] likes 615 (Source: name, Raw: "likes 615")
+- [1.5] likes 615 comments (Source: name, Raw: "likes 615 comments")
+- [1.5] quarter zip (Source: name, Raw: "quarter zip")
+- [1.5] quarter zip dude (Source: name, Raw: "quarter zip dude")
+- [1.5] zip dude (Source: name, Raw: "zip dude")
+- [1.5] year old (Source: name, Raw: "year old")
+
+--- Step 7: Dexscreener Search & Filtering ---
+
+Processing Candidate: "615" (Conf: 4)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "21" (Conf: 4)
+  Found 6 raw results from Dexscreener
+  Top result: 21 (The Official 21 Coin) - Liq: $11233.6
+    Filtered out sachi: Low Conf Mismatch (Symbol: sachi, Query: 21)
+    Filtered out chadette: Low Conf Mismatch (Symbol: chadette, Query: 21)
+    Filtered out viainti: Low Conf Mismatch (Symbol: viainti, Query: 21)
+    Filtered out athr: Low Conf Mismatch (Symbol: athr, Query: 21)
+  Kept 2 after filtering
+
+Processing Candidate: "615 comments" (Conf: 1.5)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "a quarter zip dude" (Conf: 1)
+  Found 5 raw results from Dexscreener
+  Top result: 9# FAHHHH (43# DIH LUCID QUARTERZIP) - Liq: $1899283.89
+    Filtered out 9# fahhhh: Low Conf Mismatch (Symbol: 9# fahhhh, Query: a quarter zip dude)
+    Filtered out 8# fahhhh: Low Conf Mismatch (Symbol: 8# fahhhh, Query: a quarter zip dude)
+    Filtered out shetoken: Low Conf Mismatch (Symbol: shetoken, Query: a quarter zip dude)
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: a quarter zip dude)
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: a quarter zip dude)
+  Kept 0 after filtering
+
+Processing Candidate: "548k likes" (Conf: 1.5)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "548k likes 615" (Conf: 1.5)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "likes 615" (Conf: 1.5)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "likes 615 comments" (Conf: 1.5)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "quarter zip" (Conf: 1.5)
+  Found 5 raw results from Dexscreener
+  Top result: 9# FAHHHH (43# DIH LUCID QUARTERZIP) - Liq: $1899283.89
+    Filtered out 9# fahhhh: Low Conf Mismatch (Symbol: 9# fahhhh, Query: quarter zip)
+    Filtered out 8# fahhhh: Low Conf Mismatch (Symbol: 8# fahhhh, Query: quarter zip)
+    Filtered out shetoken: Low Conf Mismatch (Symbol: shetoken, Query: quarter zip)
+  Kept 2 after filtering
+
+Processing Candidate: "quarter zip dude" (Conf: 1.5)
+  Found 5 raw results from Dexscreener
+  Top result: 9# FAHHHH (43# DIH LUCID QUARTERZIP) - Liq: $1899283.89
+    Filtered out 9# fahhhh: Low Conf Mismatch (Symbol: 9# fahhhh, Query: quarter zip dude)
+    Filtered out 8# fahhhh: Low Conf Mismatch (Symbol: 8# fahhhh, Query: quarter zip dude)
+    Filtered out shetoken: Low Conf Mismatch (Symbol: shetoken, Query: quarter zip dude)
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: quarter zip dude)
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: quarter zip dude)
+  Kept 0 after filtering
+
+Processing Candidate: "zip dude" (Conf: 1.5)
+  Found 10 raw results from Dexscreener
+  Top result: JLP (Jupiter Perps LP) - Liq: $45719.7
+    Filtered out jlp: Low Conf Mismatch (Symbol: jlp, Query: zip dude)
+    Filtered out jlp: Low Conf Mismatch (Symbol: jlp, Query: zip dude)
+    Filtered out jlp: Low Conf Mismatch (Symbol: jlp, Query: zip dude)
+    Filtered out pengu: Low Conf Mismatch (Symbol: pengu, Query: zip dude)
+    Filtered out trump : Low Conf Mismatch (Symbol: trump , Query: zip dude)
+    Filtered out inf: Low Conf Mismatch (Symbol: inf, Query: zip dude)
+    Filtered out usdg: Low Conf Mismatch (Symbol: usdg, Query: zip dude)
+    Filtered out coinomi: Low Conf Mismatch (Symbol: coinomi, Query: zip dude)
+    Filtered out mlg: Low Conf Mismatch (Symbol: mlg, Query: zip dude)
+    Filtered out giggles: Low Conf Mismatch (Symbol: giggles, Query: zip dude)
+  Kept 0 after filtering
+
+Processing Candidate: "year old" (Conf: 1.5)
+  Found 7 raw results from Dexscreener
+  Top result: HAROLD (Harold) - Liq: $404832.89
+    Filtered out harold: Low Conf Mismatch (Symbol: harold, Query: year old)
+    Filtered out luce: Low Conf Mismatch (Symbol: luce, Query: year old)
+    Filtered out doggy: Low Conf Mismatch (Symbol: doggy, Query: year old)
+    Filtered out gold: Low Conf Mismatch (Symbol: gold, Query: year old)
+    Filtered out goldcoin: Low Conf Mismatch (Symbol: goldcoin, Query: year old)
+    Filtered out xau: Low Conf Mismatch (Symbol: xau, Query: year old)
+    Filtered out paxg: Low Conf Mismatch (Symbol: paxg, Query: year old)
+  Kept 0 after filtering
+
+--- Step 8: Final Results ---
+
+Token: The Official 21 Coin ($21)
+Address: 37jeojcsyyXwtaNRD8QxQBNqP4gGeSVZXvPQrFM3YtdG
+Confidence: 4
+FDV: $11068
+Liquidity: $11233.6
+URL: https://dexscreener.com/solana/37jeojcsyyxwtanrd8qxqbnqp4ggesvzxvpqrfm3ytdg
+
+Token: The Official 21 Coin ($21)
+Address: 5pZvWUB1jM6j1LUYjmb8Mu9QUW1aCpvzmuBaThv4Dp7U
+Confidence: 4
+FDV: $4590
+Liquidity: $6828.92
+URL: https://dexscreener.com/solana/5pzvwub1jm6j1luyjmb8mu9quw1acpvzmubathv4dp7u
+
+Token: Quarter zip ($Quarterzip)
+Address: 97xX1R5hov8xNYb4DbzHKgz65hYRJNjmULKJamZEEqhN
+Confidence: 1.5
+FDV: $539952
+Liquidity: $19036.37
+URL: https://dexscreener.com/solana/97xx1r5hov8xnyb4dbzhkgz65hyrjnjmulkjamzeeqhn
+
+Token: Quarter zip ($Quarterzip)
+Address: Bex59b9UJtj4rJLrRtoyuHQtZng4c2Z4QDhtwQ3vfH7V
+Confidence: 1.5
+FDV: $527941
+Liquidity: $88499.15
+URL: https://dexscreener.com/solana/bex59b9ujtj4rjlrrtoyuhqtzng4c2z4qdhtwq3vfh7v
+npm notice
+npm notice New patch version of npm available! 11.6.2 -> 11.6.4
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.4
+npm notice To update run: npm install -g npm@11.6.4
+npm notice

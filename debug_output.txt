@@ -1,0 +1,225 @@
+=== STARTING DEBUG EXTRACTION ===
+Target URL: https://www.tiktok.com/t/ZP8U6QbLN/
+
+--- Step 1: Parse URL ---
+Parsed: {
+  "platform": "tiktok",
+  "normalizedUrl": "https://www.tiktok.com/t/ZP8U6QbLN/",
+  "isValid": true
+}
+
+--- Step 2: Fetch HTML ---
+Fetched HTML length: 12196
+
+--- Step 3: Extract Metadata ---
+Raw Title: TikTok · Jason Gyamfi
+Raw Description: 3.7M likes, 22K comments. “@Richdafifth life different when u gotta quarter zip”
+Extracted Author: 
+
+--- Step 4: Language Processing ---
+Detected Language: german
+Translating to English...
+Translated Text: TikTok · Jason Gyamfi 3.7M likes, 22K comments. “@Richdafifth life different when u gotta quarter zip”
+
+--- Step 5: Normalize Text ---
+Cleaned Text: TikTok · Jason Gyamfi 3.7M likes, 22K comments. “@Richdafifth life different when u gotta quarter zip”
+
+--- Step 6: Extract Candidates ---
+Found 10 candidates:
+- [2] Jason (Source: name, Raw: "Jason")
+- [4] Jason Gyamfi (Source: name, Raw: "Jason Gyamfi")
+- [5] Jason Gyamfi 37M (Source: name, Raw: "Jason Gyamfi 3.7M")
+- [2] Gyamfi (Source: name, Raw: "Gyamfi")
+- [4] Gyamfi 37M (Source: name, Raw: "Gyamfi 3.7M")
+- [3] 37M (Source: name, Raw: "3.7M")
+- [3] 22K (Source: name, Raw: "22K")
+- [2] Richdafifth (Source: name, Raw: "“@Richdafifth")
+- [1] 22k comments (Source: name, Raw: "22k comments")
+- [1] richdafifth life different (Source: name, Raw: "richdafifth life different")
+
+--- Step 7: Dexscreener Search & Filtering ---
+
+Processing Candidate: "Jason" (Conf: 2)
+  Found 3 raw results from Dexscreener
+  Top result: JASON (Jason Derulo) - Liq: $60715.43
+  Kept 3 after filtering
+
+Processing Candidate: "Jason Gyamfi" (Conf: 4)
+  Found 3 raw results from Dexscreener
+  Top result: JASON (Jason Derulo) - Liq: $60715.43
+    Filtered out jason: Low Conf Mismatch (Symbol: jason, Query: jason gyamfi)
+    Filtered out jason: Low Conf Mismatch (Symbol: jason, Query: jason gyamfi)
+    Filtered out jason: Low Conf Mismatch (Symbol: jason, Query: jason gyamfi)
+  Kept 0 after filtering
+
+Processing Candidate: "Jason Gyamfi 37M" (Conf: 5)
+  Found 10 raw results from Dexscreener
+  Top result: BTC  (Wrapped BTC (SOL)) - Liq: $217185.45
+  High confidence candidate, keeping all 10 results (capped by search limit)
+
+Processing Candidate: "Gyamfi" (Conf: 2)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "Gyamfi 37M" (Conf: 4)
+  Found 10 raw results from Dexscreener
+  Top result: BTC  (Wrapped BTC (SOL)) - Liq: $217185.45
+    Filtered out btc : Low Conf Mismatch (Symbol: btc , Query: gyamfi 37m)
+    Filtered out yzy: Low Conf Mismatch (Symbol: yzy, Query: gyamfi 37m)
+    Filtered out animals: Low Conf Mismatch (Symbol: animals, Query: gyamfi 37m)
+    Filtered out animals: Low Conf Mismatch (Symbol: animals, Query: gyamfi 37m)
+    Filtered out george: Low Conf Mismatch (Symbol: george, Query: gyamfi 37m)
+    Filtered out capricorn: Low Conf Mismatch (Symbol: capricorn, Query: gyamfi 37m)
+    Filtered out trump: Low Conf Mismatch (Symbol: trump, Query: gyamfi 37m)
+    Filtered out ib: Low Conf Mismatch (Symbol: ib, Query: gyamfi 37m)
+    Filtered out snibbu: Low Conf Mismatch (Symbol: snibbu, Query: gyamfi 37m)
+    Filtered out loa: Low Conf Mismatch (Symbol: loa, Query: gyamfi 37m)
+  Kept 0 after filtering
+
+Processing Candidate: "37M" (Conf: 3)
+  Found 10 raw results from Dexscreener
+  Top result: BTC  (Wrapped BTC (SOL)) - Liq: $217185.45
+    Filtered out btc : Low Conf Mismatch (Symbol: btc , Query: 37m)
+    Filtered out yzy: Low Conf Mismatch (Symbol: yzy, Query: 37m)
+    Filtered out animals: Low Conf Mismatch (Symbol: animals, Query: 37m)
+    Filtered out animals: Low Conf Mismatch (Symbol: animals, Query: 37m)
+    Filtered out george: Low Conf Mismatch (Symbol: george, Query: 37m)
+    Filtered out capricorn: Low Conf Mismatch (Symbol: capricorn, Query: 37m)
+    Filtered out trump: Low Conf Mismatch (Symbol: trump, Query: 37m)
+    Filtered out ib: Low Conf Mismatch (Symbol: ib, Query: 37m)
+    Filtered out snibbu: Low Conf Mismatch (Symbol: snibbu, Query: 37m)
+    Filtered out loa: Low Conf Mismatch (Symbol: loa, Query: 37m)
+  Kept 0 after filtering
+
+Processing Candidate: "22K" (Conf: 3)
+  Found 10 raw results from Dexscreener
+  Top result: Gato (Sad Gato) - Liq: $51700.69
+    Filtered out gato: Low Conf Mismatch (Symbol: gato, Query: 22k)
+    Filtered out facebook: Low Conf Mismatch (Symbol: facebook, Query: 22k)
+    Filtered out updog: Low Conf Mismatch (Symbol: updog, Query: 22k)
+    Filtered out boggy: Low Conf Mismatch (Symbol: boggy, Query: 22k)
+    Filtered out ruecat: Low Conf Mismatch (Symbol: ruecat, Query: 22k)
+    Filtered out cults: Low Conf Mismatch (Symbol: cults, Query: 22k)
+    Filtered out ubi: Low Conf Mismatch (Symbol: ubi, Query: 22k)
+    Filtered out maic: Low Conf Mismatch (Symbol: maic, Query: 22k)
+    Filtered out mmm: Low Conf Mismatch (Symbol: mmm, Query: 22k)
+    Filtered out hugo: Low Conf Mismatch (Symbol: hugo, Query: 22k)
+  Kept 0 after filtering
+
+Processing Candidate: "Richdafifth" (Conf: 2)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "22k comments" (Conf: 1)
+  Found 10 raw results from Dexscreener
+  Top result: Gato (Sad Gato) - Liq: $51700.69
+    Filtered out gato: Low Conf Mismatch (Symbol: gato, Query: 22k comments)
+    Filtered out facebook: Low Conf Mismatch (Symbol: facebook, Query: 22k comments)
+    Filtered out updog: Low Conf Mismatch (Symbol: updog, Query: 22k comments)
+    Filtered out boggy: Low Conf Mismatch (Symbol: boggy, Query: 22k comments)
+    Filtered out ruecat: Low Conf Mismatch (Symbol: ruecat, Query: 22k comments)
+    Filtered out cults: Low Conf Mismatch (Symbol: cults, Query: 22k comments)
+    Filtered out ubi: Low Conf Mismatch (Symbol: ubi, Query: 22k comments)
+    Filtered out maic: Low Conf Mismatch (Symbol: maic, Query: 22k comments)
+    Filtered out mmm: Low Conf Mismatch (Symbol: mmm, Query: 22k comments)
+    Filtered out hugo: Low Conf Mismatch (Symbol: hugo, Query: 22k comments)
+  Kept 0 after filtering
+
+Processing Candidate: "richdafifth life different" (Conf: 1)
+  Found 10 raw results from Dexscreener
+  Top result: 1 (1 coin can change your life) - Liq: $422994.46
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life different)
+    Filtered out spark: Low Conf Mismatch (Symbol: spark, Query: richdafifth life different)
+    Filtered out spark: Low Conf Mismatch (Symbol: spark, Query: richdafifth life different)
+    Filtered out pill: Low Conf Mismatch (Symbol: pill, Query: richdafifth life different)
+    Filtered out life++: Low Conf Mismatch (Symbol: life++, Query: richdafifth life different)
+    Filtered out tanaki: Low Conf Mismatch (Symbol: tanaki, Query: richdafifth life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life different)
+  Kept 0 after filtering
+
+--- Step 8: Final Results ---
+
+Token: Wrapped BTC (SOL) ($BTC )
+Address: JtVpdRQ8pffhVzfRN8gwNjrJEVs2sx5Ro5T6w37MXHS
+Confidence: 5
+FDV: $8452770
+Liquidity: $217185.45
+URL: https://dexscreener.com/solana/jtvpdrq8pffhvzfrn8gwnjrjevs2sx5ro5t6w37mxhs
+
+Token: Yeezy Coin ($YzY)
+Address: 2HJSwnU546FLbHVenh8bP6obbQ6f3BW37MsoSSRGenpK
+Confidence: 5
+FDV: $1606423
+Liquidity: $65523.85
+URL: https://dexscreener.com/solana/2hjswnu546flbhvenh8bp6obbq6f3bw37msossrgenpk
+
+Token: Animals Fund ($ANIMALS)
+Address: 9FwXjoJoy5XitEDpQjJw9nUJnEcoS9AvkJHH6WeXS783
+Confidence: 5
+FDV: $693364
+Liquidity: $21161.86
+URL: https://dexscreener.com/solana/9fwxjojoy5xitedpqjjw9nujnecos9avkjhh6wexs783
+
+Token: Animals Fund ($ANIMALS)
+Address: Ggv8EZnq3KRkGo731Qsyu7F64WdTfMs7d8Sy4F9AJZKd
+Confidence: 5
+FDV: $676437
+Liquidity: $90598.58
+URL: https://dexscreener.com/solana/ggv8eznq3krkgo731qsyu7f64wdtfms7d8sy4f9ajzkd
+
+Token: George Washington Monument ($GEORGE)
+Address: 9iGPntZ37MMyKGX6oDJ8fj2tVnY2FArsEGsmHVjR9RRk
+Confidence: 5
+FDV: $98870
+Liquidity: $40215.12
+URL: https://dexscreener.com/solana/9igpntz37mmykgx6odj8fj2tvny2farsegsmhvjr9rrk
+
+Token: Capricorn ($CAPRICORN)
+Address: 549aknNCvxbiqmikS6sAnY6Dbg37MeENWn6ZFBfc7sin
+Confidence: 5
+FDV: $97644
+Liquidity: $19122.79
+URL: https://dexscreener.com/solana/549aknncvxbiqmiks6sany6dbg37meenwn6zfbfc7sin
+
+Token: Donald Trump ($TRUMP)
+Address: DPF4qDuUnX5TMUkn3auJHXdddX7DDVTBVhrrmMVRFmRR
+Confidence: 5
+FDV: $81427
+Liquidity: $11439.24
+URL: https://dexscreener.com/solana/dpf4qduunx5tmukn3aujhxdddx7ddvtbvhrrmmvrfmrr
+
+Token: Jason Derulo ($JASON)
+Address: 4XmdX5Umx7qt3uvMapdXzWPQefx2WZf4tZ69XAmNyF3X
+Confidence: 5
+FDV: $66323
+Liquidity: $60715.43
+URL: https://dexscreener.com/solana/4xmdx5umx7qt3uvmapdxzwpqefx2wzf4tz69xamnyf3x
+
+Token: infinite backrooms ($IB)
+Address: GCDD3JLwS37meVuVws8vaWbGN2RzeEFRRoK23JY7g5X6
+Confidence: 5
+FDV: $55170
+Liquidity: $55526.15
+URL: https://dexscreener.com/solana/gcdd3jlws37mevuvws8vawbgn2rzeefrrok23jy7g5x6
+
+Token: GrandTheftJason ($Jason)
+Address: 8uqEr6iXdH1UALKTMAWhf3ecSqU5y4BYJ1tiiHT9Ccqa
+Confidence: 5
+FDV: $25288
+Liquidity: $16003.95
+URL: https://dexscreener.com/solana/8uqer6ixdh1ualktmawhf3ecsqu5y4byj1tiiht9ccqa
+
+Token: gta 6 main character ($jason)
+Address: HcQbt6gry97UqZ9cVtKmLWQxm1hEgJDMLUbhZBnfKygZ
+Confidence: 2
+FDV: $6922
+Liquidity: $9304.88
+URL: https://dexscreener.com/solana/hcqbt6gry97uqz9cvtkmlwqxm1hegjdmlubhzbnfkygz
+npm notice
+npm notice New patch version of npm available! 11.6.2 -> 11.6.4
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.4
+npm notice To update run: npm install -g npm@11.6.4
+npm notice

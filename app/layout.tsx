@@ -8,8 +8,8 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "viralmint | Solana Only",
-  description: "Find Solana tokens from TikTok and Instagram Reels.",
+  title: "ViralScan",
+  description: "Find the coins behind the viral videos.",
 };
 
 import { Analytics } from "@vercel/analytics/react";

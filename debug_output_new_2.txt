@@ -1,0 +1,86 @@
+=== STARTING DEBUG EXTRACTION FOR MULTIPLE URLS ===
+
+
+
+================================================================================
+PROCESSING URL: https://www.tiktok.com/t/ZP8U6Vm4t/
+================================================================================
+Target URL: https://www.tiktok.com/t/ZP8U6Vm4t/
+
+--- Step 1: Parse URL ---
+Parsed: {
+  "platform": "tiktok",
+  "normalizedUrl": "https://www.tiktok.com/t/ZP8U6Vm4t/",
+  "isValid": true
+}
+
+--- Step 2: Fetch HTML ---
+Fetched HTML length: 12620
+
+--- Step 3: Extract Metadata ---
+Raw Title: TikTok · ABC News Live
+Raw Description: 54.8K likes, 615 comments. ““I’m a quarter-zip dude now!” 21-year-old social media influencer @whois.jason is inspiring his followers to dress for success and expand their horizons.”
+Extracted Author: ABC News Live
+
+--- Step 4: Language Processing ---
+Detected Language: english
+
+--- Step 5: Normalize Text ---
+Cleaned Text: TikTok · 54.8K likes, 615 comments. ““I’m a quarter zip dude now!” 21 year old social media influencer @whois.jason is inspiring his followers to dress for success and expand their horizons.”
+
+--- Step 6: Extract Candidates ---
+Found 4 candidates:
+- [4] 615 (Source: name, Raw: "615")
+- [4] 21 (Source: name, Raw: "21")
+- [1] 615 comments (Source: name, Raw: "615 comments")
+- [1] a quarter zip dude (Source: name, Raw: "a quarter zip dude")
+
+--- Step 7: Dexscreener Search & Filtering ---
+
+Processing Candidate: "615" (Conf: 4)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "21" (Conf: 4)
+  Found 6 raw results from Dexscreener
+  Top result: 21 (The Official 21 Coin) - Liq: $11233.6
+    Filtered out sachi: Low Conf Mismatch (Symbol: sachi, Query: 21)
+    Filtered out chadette: Low Conf Mismatch (Symbol: chadette, Query: 21)
+    Filtered out viainti: Low Conf Mismatch (Symbol: viainti, Query: 21)
+    Filtered out athr: Low Conf Mismatch (Symbol: athr, Query: 21)
+  Kept 2 after filtering
+
+Processing Candidate: "615 comments" (Conf: 1)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "a quarter zip dude" (Conf: 1)
+  Found 5 raw results from Dexscreener
+  Top result: 9# FAHHHH (43# DIH LUCID QUARTERZIP) - Liq: $1899283.89
+    Filtered out 9# fahhhh: Low Conf Mismatch (Symbol: 9# fahhhh, Query: a quarter zip dude)
+    Filtered out 8# fahhhh: Low Conf Mismatch (Symbol: 8# fahhhh, Query: a quarter zip dude)
+    Filtered out shetoken: Low Conf Mismatch (Symbol: shetoken, Query: a quarter zip dude)
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: a quarter zip dude)
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: a quarter zip dude)
+  Kept 0 after filtering
+
+--- Step 8: Final Results ---
+
+Token: The Official 21 Coin ($21)
+Address: 37jeojcsyyXwtaNRD8QxQBNqP4gGeSVZXvPQrFM3YtdG
+Confidence: 4
+FDV: $11068
+Liquidity: $11233.6
+URL: https://dexscreener.com/solana/37jeojcsyyxwtanrd8qxqbnqp4ggesvzxvpqrfm3ytdg
+
+Token: The Official 21 Coin ($21)
+Address: 5pZvWUB1jM6j1LUYjmb8Mu9QUW1aCpvzmuBaThv4Dp7U
+Confidence: 4
+FDV: $4590
+Liquidity: $6828.92
+URL: https://dexscreener.com/solana/5pzvwub1jm6j1luyjmb8mu9quw1acpvzmubathv4dp7u
+npm notice
+npm notice New patch version of npm available! 11.6.2 -> 11.6.4
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.4
+npm notice To update run: npm install -g npm@11.6.4
+npm notice

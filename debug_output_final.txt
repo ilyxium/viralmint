@@ -1,0 +1,382 @@
+=== STARTING DEBUG EXTRACTION FOR MULTIPLE URLS ===
+
+
+
+================================================================================
+PROCESSING URL: https://www.instagram.com/reel/DRXQt6HkbZu/?igsh=MWg5NGRjc25ka3lwaQ==
+================================================================================
+Target URL: https://www.instagram.com/reel/DRXQt6HkbZu/?igsh=MWg5NGRjc25ka3lwaQ==
+
+--- Step 1: Parse URL ---
+Parsed: {
+  "platform": "instagram",
+  "normalizedUrl": "https://www.instagram.com/reel/DRXQt6HkbZu/?igsh=MWg5NGRjc25ka3lwaQ==",
+  "isValid": true
+}
+
+--- Step 2: Fetch HTML ---
+Fetched HTML length: 809433
+
+--- Step 3: Extract Metadata ---
+Raw Title: Tre Carter on Instagram: "A QUARTER ZIP TOUCH WILL TURN YOU FROM SWITCHES & CHOPPAS TO SWEATERS & MATCHAS 🫳🏾🍵🤣"
+Raw Description: In this engaging post, learn how a quarter-zip jacket can elevate your style from casual to sophisticated. Explore the quarter-zip community and discover the perfect blend of comfort and fashion.
+Extracted Author: Tre Carter
+
+--- Step 4: Language Processing ---
+Detected Language: english
+
+--- Step 5: Normalize Text ---
+Cleaned Text: on Instagram: "A QUARTER ZIP TOUCH WILL TURN YOU FROM SWITCHES & CHOPPAS TO SWEATERS & MATCHAS 🫳🏾🍵🤣" In this engaging post, learn how a quarter-zip jacket can elevate your style from casual to sophisticated. Explore the quarter-zip community and discover the perfect blend of comfort and fashion.
+
+--- Step 6: Extract Candidates ---
+Found 10 candidates:
+- [0.5] QUARTER (Source: name, Raw: "QUARTER")
+- [4] QUARTER ZIP (Source: name, Raw: "QUARTER ZIP")
+- [0.5] ZIP (Source: name, Raw: "ZIP")
+- [0.5] SWITCHES (Source: name, Raw: "SWITCHES")
+- [0.5] CHOPPAS (Source: name, Raw: "CHOPPAS")
+- [0.5] SWEATERS (Source: name, Raw: "SWEATERS")
+- [0.5] MATCHAS (Source: name, Raw: "MATCHAS")
+- [2] Explore (Source: name, Raw: "Explore")
+- [1] switches  choppas (Source: name, Raw: "switches  choppas")
+- [1] a quarterzip jacket (Source: name, Raw: "a quarterzip jacket")
+
+--- Step 7: Dexscreener Search & Filtering ---
+
+Processing Candidate: "QUARTER" (Conf: 0.5)
+  Found 3 raw results from Dexscreener
+  Top result: Quarterzip (Quarter zip) - Liq: $93604.34
+    Filtered out quarterzip: Soft Block (Exact: false, HighLiq: false)
+    Filtered out quarterzip: Soft Block (Exact: false, HighLiq: false)
+    Filtered out q4: Soft Block (Exact: false, HighLiq: false)
+  Kept 0 after filtering
+
+Processing Candidate: "QUARTER ZIP" (Conf: 4)
+  Found 5 raw results from Dexscreener
+  Top result: 9# FAHHHH (43# DIH LUCID QUARTERZIP) - Liq: $1899283.89
+    Filtered out 9# fahhhh: Low Conf Mismatch (Symbol: 9# fahhhh, Query: quarter zip)
+    Filtered out 8# fahhhh: Low Conf Mismatch (Symbol: 8# fahhhh, Query: quarter zip)
+    Filtered out shetoken: Low Conf Mismatch (Symbol: shetoken, Query: quarter zip)
+  Kept 2 after filtering
+
+Processing Candidate: "ZIP" (Conf: 0.5)
+  Found 10 raw results from Dexscreener
+  Top result: JLP (Jupiter Perps LP) - Liq: $45714.59
+    Filtered out jlp: Soft Block (Exact: false, HighLiq: false)
+    Filtered out jlp: Soft Block (Exact: false, HighLiq: false)
+    Filtered out jlp: Soft Block (Exact: false, HighLiq: false)
+    Filtered out pengu: Soft Block (Exact: false, HighLiq: false)
+    Filtered out trump : Soft Block (Exact: false, HighLiq: true)
+    Filtered out inf: Soft Block (Exact: false, HighLiq: true)
+    Filtered out usdg: Soft Block (Exact: false, HighLiq: true)
+    Filtered out coinomi: Soft Block (Exact: false, HighLiq: false)
+    Filtered out mlg: Soft Block (Exact: false, HighLiq: true)
+    Filtered out giggles: Soft Block (Exact: false, HighLiq: true)
+  Kept 0 after filtering
+
+Processing Candidate: "SWITCHES" (Conf: 0.5)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "CHOPPAS" (Conf: 0.5)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "SWEATERS" (Conf: 0.5)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "MATCHAS" (Conf: 0.5)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "Explore" (Conf: 2)
+  Found 1 raw results from Dexscreener
+  Top result: SSE (Solana Social Explorer) - Liq: $195875.04
+    Filtered out sse: Low Conf Mismatch (Symbol: sse, Query: explore)
+  Kept 0 after filtering
+
+Processing Candidate: "switches  choppas" (Conf: 1)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "a quarterzip jacket" (Conf: 1)
+  Found 5 raw results from Dexscreener
+  Top result: 9# FAHHHH (43# DIH LUCID QUARTERZIP) - Liq: $1899283.89
+    Filtered out 9# fahhhh: Low Conf Mismatch (Symbol: 9# fahhhh, Query: a quarterzip jacket)
+    Filtered out 8# fahhhh: Low Conf Mismatch (Symbol: 8# fahhhh, Query: a quarterzip jacket)
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: a quarterzip jacket)
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: a quarterzip jacket)
+    Filtered out shetoken: Low Conf Mismatch (Symbol: shetoken, Query: a quarterzip jacket)
+  Kept 0 after filtering
+
+--- Step 8: Final Results ---
+
+Token: Quarter zip ($Quarterzip)
+Address: Bex59b9UJtj4rJLrRtoyuHQtZng4c2Z4QDhtwQ3vfH7V
+Confidence: 4
+FDV: $590709
+Liquidity: $93604.34
+URL: https://dexscreener.com/solana/bex59b9ujtj4rjlrrtoyuhqtzng4c2z4qdhtwq3vfh7v
+
+Token: Quarter zip ($Quarterzip)
+Address: 97xX1R5hov8xNYb4DbzHKgz65hYRJNjmULKJamZEEqhN
+Confidence: 4
+FDV: $590040
+Liquidity: $19276.66
+URL: https://dexscreener.com/solana/97xx1r5hov8xnyb4dbzhkgz65hyrjnjmulkjamzeeqhn
+
+
+
+================================================================================
+PROCESSING URL: https://www.tiktok.com/t/ZP8U6QbLN/
+================================================================================
+Target URL: https://www.tiktok.com/t/ZP8U6QbLN/
+
+--- Step 1: Parse URL ---
+Parsed: {
+  "platform": "tiktok",
+  "normalizedUrl": "https://www.tiktok.com/t/ZP8U6QbLN/",
+  "isValid": true
+}
+
+--- Step 2: Fetch HTML ---
+Fetched HTML length: 12196
+
+--- Step 3: Extract Metadata ---
+Raw Title: TikTok · Jason Gyamfi
+Raw Description: 3.7M likes, 22K comments. “@Richdafifth life different when u gotta quarter zip”
+Extracted Author: Jason Gyamfi
+
+--- Step 4: Language Processing ---
+Detected Language: german
+Translating to English...
+Translated Text: TikTok · Jason Gyamfi 3.7M likes, 22K comments. “@Richdafifth life different when u gotta quarter zip”
+
+--- Step 5: Normalize Text ---
+Cleaned Text: TikTok · 3.7M likes, 22K comments. “@Richdafifth life different when u gotta quarter zip”
+
+--- Step 6: Extract Candidates ---
+Found 15 candidates:
+- [2] Richdafifth (Source: name, Raw: "“@Richdafifth")
+- [1.5] 22k comments (Source: name, Raw: "22k comments")
+- [1.5] richdafifth life different (Source: name, Raw: "richdafifth life different")
+- [1.5] quarter zip (Source: name, Raw: "quarter zip")
+- [1.5] 37m likes (Source: name, Raw: "37m likes")
+- [1.5] 37m likes 22k (Source: name, Raw: "37m likes 22k")
+- [1.5] likes 22k (Source: name, Raw: "likes 22k")
+- [1.5] likes 22k comments (Source: name, Raw: "likes 22k comments")
+- [1.5] 22k comments richdafifth (Source: name, Raw: "22k comments richdafifth")
+- [1.5] comments richdafifth (Source: name, Raw: "comments richdafifth")
+- [1.5] comments richdafifth life (Source: name, Raw: "comments richdafifth life")
+- [1.5] richdafifth life (Source: name, Raw: "richdafifth life")
+- [1.5] life different (Source: name, Raw: "life different")
+- [1.5] gotta quarter (Source: name, Raw: "gotta quarter")
+- [1.5] gotta quarter zip (Source: name, Raw: "gotta quarter zip")
+
+--- Step 7: Dexscreener Search & Filtering ---
+
+Processing Candidate: "Richdafifth" (Conf: 2)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "22k comments" (Conf: 1.5)
+  Found 10 raw results from Dexscreener
+  Top result: Gato (Sad Gato) - Liq: $51700.69
+    Filtered out gato: Low Conf Mismatch (Symbol: gato, Query: 22k comments)
+    Filtered out facebook: Low Conf Mismatch (Symbol: facebook, Query: 22k comments)
+    Filtered out updog: Low Conf Mismatch (Symbol: updog, Query: 22k comments)
+    Filtered out boggy: Low Conf Mismatch (Symbol: boggy, Query: 22k comments)
+    Filtered out ruecat: Low Conf Mismatch (Symbol: ruecat, Query: 22k comments)
+    Filtered out cults: Low Conf Mismatch (Symbol: cults, Query: 22k comments)
+    Filtered out ubi: Low Conf Mismatch (Symbol: ubi, Query: 22k comments)
+    Filtered out maic: Low Conf Mismatch (Symbol: maic, Query: 22k comments)
+    Filtered out mmm: Low Conf Mismatch (Symbol: mmm, Query: 22k comments)
+    Filtered out hugo: Low Conf Mismatch (Symbol: hugo, Query: 22k comments)
+  Kept 0 after filtering
+
+Processing Candidate: "richdafifth life different" (Conf: 1.5)
+  Found 10 raw results from Dexscreener
+  Top result: 1 (1 coin can change your life) - Liq: $70748.04
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life different)
+    Filtered out spark: Low Conf Mismatch (Symbol: spark, Query: richdafifth life different)
+    Filtered out spark: Low Conf Mismatch (Symbol: spark, Query: richdafifth life different)
+    Filtered out pill: Low Conf Mismatch (Symbol: pill, Query: richdafifth life different)
+    Filtered out life++: Low Conf Mismatch (Symbol: life++, Query: richdafifth life different)
+    Filtered out tanaki: Low Conf Mismatch (Symbol: tanaki, Query: richdafifth life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life different)
+  Kept 0 after filtering
+
+Processing Candidate: "quarter zip" (Conf: 1.5)
+  Found 5 raw results from Dexscreener
+  Top result: 9# FAHHHH (43# DIH LUCID QUARTERZIP) - Liq: $1899283.89
+    Filtered out 9# fahhhh: Low Conf Mismatch (Symbol: 9# fahhhh, Query: quarter zip)
+    Filtered out 8# fahhhh: Low Conf Mismatch (Symbol: 8# fahhhh, Query: quarter zip)
+    Filtered out shetoken: Low Conf Mismatch (Symbol: shetoken, Query: quarter zip)
+  Kept 2 after filtering
+
+Processing Candidate: "37m likes" (Conf: 1.5)
+  Found 10 raw results from Dexscreener
+  Top result: BTC  (Wrapped BTC (SOL)) - Liq: $217185.45
+    Filtered out btc : Low Conf Mismatch (Symbol: btc , Query: 37m likes)
+    Filtered out yzy: Low Conf Mismatch (Symbol: yzy, Query: 37m likes)
+    Filtered out animals: Low Conf Mismatch (Symbol: animals, Query: 37m likes)
+    Filtered out animals: Low Conf Mismatch (Symbol: animals, Query: 37m likes)
+    Filtered out george: Low Conf Mismatch (Symbol: george, Query: 37m likes)
+    Filtered out capricorn: Low Conf Mismatch (Symbol: capricorn, Query: 37m likes)
+    Filtered out trump: Low Conf Mismatch (Symbol: trump, Query: 37m likes)
+    Filtered out ib: Low Conf Mismatch (Symbol: ib, Query: 37m likes)
+    Filtered out snibbu: Low Conf Mismatch (Symbol: snibbu, Query: 37m likes)
+    Filtered out loa: Low Conf Mismatch (Symbol: loa, Query: 37m likes)
+  Kept 0 after filtering
+
+Processing Candidate: "37m likes 22k" (Conf: 1.5)
+  Found 10 raw results from Dexscreener
+  Top result: BTC  (Wrapped BTC (SOL)) - Liq: $217185.45
+    Filtered out btc : Low Conf Mismatch (Symbol: btc , Query: 37m likes 22k)
+    Filtered out yzy: Low Conf Mismatch (Symbol: yzy, Query: 37m likes 22k)
+    Filtered out animals: Low Conf Mismatch (Symbol: animals, Query: 37m likes 22k)
+    Filtered out animals: Low Conf Mismatch (Symbol: animals, Query: 37m likes 22k)
+    Filtered out updog: Low Conf Mismatch (Symbol: updog, Query: 37m likes 22k)
+    Filtered out boggy: Low Conf Mismatch (Symbol: boggy, Query: 37m likes 22k)
+    Filtered out george: Low Conf Mismatch (Symbol: george, Query: 37m likes 22k)
+    Filtered out capricorn: Low Conf Mismatch (Symbol: capricorn, Query: 37m likes 22k)
+    Filtered out trump: Low Conf Mismatch (Symbol: trump, Query: 37m likes 22k)
+    Filtered out ruecat: Low Conf Mismatch (Symbol: ruecat, Query: 37m likes 22k)
+  Kept 0 after filtering
+
+Processing Candidate: "likes 22k" (Conf: 1.5)
+  Found 10 raw results from Dexscreener
+  Top result: Gato (Sad Gato) - Liq: $51700.69
+    Filtered out gato: Low Conf Mismatch (Symbol: gato, Query: likes 22k)
+    Filtered out facebook: Low Conf Mismatch (Symbol: facebook, Query: likes 22k)
+    Filtered out updog: Low Conf Mismatch (Symbol: updog, Query: likes 22k)
+    Filtered out boggy: Low Conf Mismatch (Symbol: boggy, Query: likes 22k)
+    Filtered out ruecat: Low Conf Mismatch (Symbol: ruecat, Query: likes 22k)
+    Filtered out cults: Low Conf Mismatch (Symbol: cults, Query: likes 22k)
+    Filtered out ubi: Low Conf Mismatch (Symbol: ubi, Query: likes 22k)
+    Filtered out maic: Low Conf Mismatch (Symbol: maic, Query: likes 22k)
+    Filtered out mmm: Low Conf Mismatch (Symbol: mmm, Query: likes 22k)
+    Filtered out hugo: Low Conf Mismatch (Symbol: hugo, Query: likes 22k)
+  Kept 0 after filtering
+
+Processing Candidate: "likes 22k comments" (Conf: 1.5)
+  Found 10 raw results from Dexscreener
+  Top result: Gato (Sad Gato) - Liq: $51700.69
+    Filtered out gato: Low Conf Mismatch (Symbol: gato, Query: likes 22k comments)
+    Filtered out facebook: Low Conf Mismatch (Symbol: facebook, Query: likes 22k comments)
+    Filtered out updog: Low Conf Mismatch (Symbol: updog, Query: likes 22k comments)
+    Filtered out boggy: Low Conf Mismatch (Symbol: boggy, Query: likes 22k comments)
+    Filtered out ruecat: Low Conf Mismatch (Symbol: ruecat, Query: likes 22k comments)
+    Filtered out cults: Low Conf Mismatch (Symbol: cults, Query: likes 22k comments)
+    Filtered out ubi: Low Conf Mismatch (Symbol: ubi, Query: likes 22k comments)
+    Filtered out maic: Low Conf Mismatch (Symbol: maic, Query: likes 22k comments)
+    Filtered out mmm: Low Conf Mismatch (Symbol: mmm, Query: likes 22k comments)
+    Filtered out hugo: Low Conf Mismatch (Symbol: hugo, Query: likes 22k comments)
+  Kept 0 after filtering
+
+Processing Candidate: "22k comments richdafifth" (Conf: 1.5)
+  Found 10 raw results from Dexscreener
+  Top result: Gato (Sad Gato) - Liq: $51700.69
+    Filtered out gato: Low Conf Mismatch (Symbol: gato, Query: 22k comments richdafifth)
+    Filtered out facebook: Low Conf Mismatch (Symbol: facebook, Query: 22k comments richdafifth)
+    Filtered out updog: Low Conf Mismatch (Symbol: updog, Query: 22k comments richdafifth)
+    Filtered out boggy: Low Conf Mismatch (Symbol: boggy, Query: 22k comments richdafifth)
+    Filtered out ruecat: Low Conf Mismatch (Symbol: ruecat, Query: 22k comments richdafifth)
+    Filtered out cults: Low Conf Mismatch (Symbol: cults, Query: 22k comments richdafifth)
+    Filtered out ubi: Low Conf Mismatch (Symbol: ubi, Query: 22k comments richdafifth)
+    Filtered out maic: Low Conf Mismatch (Symbol: maic, Query: 22k comments richdafifth)
+    Filtered out mmm: Low Conf Mismatch (Symbol: mmm, Query: 22k comments richdafifth)
+    Filtered out hugo: Low Conf Mismatch (Symbol: hugo, Query: 22k comments richdafifth)
+  Kept 0 after filtering
+
+Processing Candidate: "comments richdafifth" (Conf: 1.5)
+  Found 0 raw results from Dexscreener
+  Kept 0 after filtering
+
+Processing Candidate: "comments richdafifth life" (Conf: 1.5)
+  Found 10 raw results from Dexscreener
+  Top result: 1 (1 coin can change your life) - Liq: $70748.04
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: comments richdafifth life)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: comments richdafifth life)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: comments richdafifth life)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: comments richdafifth life)
+    Filtered out spark: Low Conf Mismatch (Symbol: spark, Query: comments richdafifth life)
+    Filtered out spark: Low Conf Mismatch (Symbol: spark, Query: comments richdafifth life)
+    Filtered out pill: Low Conf Mismatch (Symbol: pill, Query: comments richdafifth life)
+    Filtered out life++: Low Conf Mismatch (Symbol: life++, Query: comments richdafifth life)
+    Filtered out tanaki: Low Conf Mismatch (Symbol: tanaki, Query: comments richdafifth life)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: comments richdafifth life)
+  Kept 0 after filtering
+
+Processing Candidate: "richdafifth life" (Conf: 1.5)
+  Found 10 raw results from Dexscreener
+  Top result: 1 (1 coin can change your life) - Liq: $70748.04
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life)
+    Filtered out spark: Low Conf Mismatch (Symbol: spark, Query: richdafifth life)
+    Filtered out spark: Low Conf Mismatch (Symbol: spark, Query: richdafifth life)
+    Filtered out pill: Low Conf Mismatch (Symbol: pill, Query: richdafifth life)
+    Filtered out life++: Low Conf Mismatch (Symbol: life++, Query: richdafifth life)
+    Filtered out tanaki: Low Conf Mismatch (Symbol: tanaki, Query: richdafifth life)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: richdafifth life)
+  Kept 0 after filtering
+
+Processing Candidate: "life different" (Conf: 1.5)
+  Found 10 raw results from Dexscreener
+  Top result: 1 (1 coin can change your life) - Liq: $70748.04
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: life different)
+    Filtered out spark: Low Conf Mismatch (Symbol: spark, Query: life different)
+    Filtered out spark: Low Conf Mismatch (Symbol: spark, Query: life different)
+    Filtered out pill: Low Conf Mismatch (Symbol: pill, Query: life different)
+    Filtered out life++: Low Conf Mismatch (Symbol: life++, Query: life different)
+    Filtered out tanaki: Low Conf Mismatch (Symbol: tanaki, Query: life different)
+    Filtered out 1: Low Conf Mismatch (Symbol: 1, Query: life different)
+  Kept 0 after filtering
+
+Processing Candidate: "gotta quarter" (Conf: 1.5)
+  Found 3 raw results from Dexscreener
+  Top result: Quarterzip (Quarter zip) - Liq: $91750.29
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: gotta quarter)
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: gotta quarter)
+    Filtered out q4: Low Conf Mismatch (Symbol: q4, Query: gotta quarter)
+  Kept 0 after filtering
+
+Processing Candidate: "gotta quarter zip" (Conf: 1.5)
+  Found 5 raw results from Dexscreener
+  Top result: 9# FAHHHH (43# DIH LUCID QUARTERZIP) - Liq: $1899283.89
+    Filtered out 9# fahhhh: Low Conf Mismatch (Symbol: 9# fahhhh, Query: gotta quarter zip)
+    Filtered out 8# fahhhh: Low Conf Mismatch (Symbol: 8# fahhhh, Query: gotta quarter zip)
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: gotta quarter zip)
+    Filtered out quarterzip: Low Conf Mismatch (Symbol: quarterzip, Query: gotta quarter zip)
+    Filtered out shetoken: Low Conf Mismatch (Symbol: shetoken, Query: gotta quarter zip)
+  Kept 0 after filtering
+
+--- Step 8: Final Results ---
+
+Token: Quarter zip ($Quarterzip)
+Address: 97xX1R5hov8xNYb4DbzHKgz65hYRJNjmULKJamZEEqhN
+Confidence: 1.5
+FDV: $590040
+Liquidity: $19276.66
+URL: https://dexscreener.com/solana/97xx1r5hov8xnyb4dbzhkgz65hyrjnjmulkjamzeeqhn
+
+Token: Quarter zip ($Quarterzip)
+Address: Bex59b9UJtj4rJLrRtoyuHQtZng4c2Z4QDhtwQ3vfH7V
+Confidence: 1.5
+FDV: $567493
+Liquidity: $91750.29
+URL: https://dexscreener.com/solana/bex59b9ujtj4rjlrrtoyuhqtzng4c2z4qdhtwq3vfh7v
+npm notice
+npm notice New patch version of npm available! 11.6.2 -> 11.6.4
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.4
+npm notice To update run: npm install -g npm@11.6.4
+npm notice
