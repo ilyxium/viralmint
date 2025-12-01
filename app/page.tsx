@@ -94,6 +94,9 @@ export default function Home() {
         setCoins(data.coins || []);
         setCandidates(data.candidates || []);
         setHasSearched(true);
+
+        // Refresh counter immediately after search
+        fetchStats();
       }
     } catch (err) {
       setError("Failed to connect to the server.");
@@ -105,12 +108,36 @@ export default function Home() {
   const isResultMode = hasSearched || coins.length > 0 || !!meta;
 
   const [searchCount, setSearchCount] = useState<number | null>(null);
+  const [isShaking, setIsShaking] = useState(false);
+  const prevCountRef = React.useRef<number | null>(null);
 
-  useEffect(() => {
+  // Fetch stats with polling
+  const fetchStats = () => {
     fetch("/api/stats")
       .then((res) => res.json())
-      .then((data) => setSearchCount(data.count))
+      .then((data) => {
+        const newCount = data.count;
+
+        // Trigger shake if count changed
+        if (prevCountRef.current !== null && newCount > prevCountRef.current) {
+          setIsShaking(true);
+          setTimeout(() => setIsShaking(false), 500);
+        }
+
+        prevCountRef.current = newCount;
+        setSearchCount(newCount);
+      })
       .catch((err) => console.error("Failed to fetch stats", err));
+  };
+
+  useEffect(() => {
+    // Initial fetch
+    fetchStats();
+
+    // Poll every 5 seconds
+    const interval = setInterval(fetchStats, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -125,7 +152,7 @@ export default function Home() {
             <div className="h-4 w-px bg-zinc-800"></div>
             {searchCount !== null && (
               <>
-                <div className="flex items-center gap-1.5 bg-orange-500/10 px-2 py-0.5 rounded-full border border-orange-500/20">
+                <div className={`flex items-center gap-1.5 bg-orange-500/10 px-2 py-0.5 rounded-full border border-orange-500/20 transition-transform ${isShaking ? 'animate-shake' : ''}`}>
                   <span className="text-sm">🔥</span>
                   <p className="text-orange-200/80 font-medium text-xs sm:text-sm">
                     <span className="text-orange-400 font-bold">{searchCount.toLocaleString()}</span> links scanned
