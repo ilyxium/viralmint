@@ -28,7 +28,7 @@ export default function Icon() {
                     fontWeight: 900,
                 }}
             >
-                V
+                v
             </div>
         ),
         {

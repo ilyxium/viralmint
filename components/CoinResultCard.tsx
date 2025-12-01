@@ -2,7 +2,6 @@
 
 import React from "react";
 import { DexscreenerCoin } from "@/lib/dexscreener";
-import { useWallet } from "@solana/wallet-adapter-react";
 
 type CoinResultCardProps = {
     coin: DexscreenerCoin;
@@ -10,42 +9,12 @@ type CoinResultCardProps = {
 };
 
 export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
-    const walletContextState = useWallet();
-    const { wallet, connected } = walletContextState;
+    const [copied, setCopied] = React.useState(false);
 
-    // Construct Jupiter Swap URL (fallback)
-    const jupiterUrl = `https://jup.ag/swap/SOL-${coin.baseToken.address}`;
-
-    const launchTerminal = () => {
-        if (!connected || !wallet) {
-            alert("Please connect your wallet first to trade.");
-            return;
-        }
-
-        console.log("Attempting to launch Jupiter Terminal with wallet:", walletContextState);
-
-        if (window.Jupiter) {
-            window.Jupiter.init({
-                endpoint: "https://solana-rpc.publicnode.com",
-                enableWalletPassthrough: true,
-                passthroughWalletContextState: walletContextState,
-                strictTokenList: false,
-                defaultExplorer: "SolanaFM",
-                formProps: {
-                    initialInputMint: "So11111111111111111111111111111111111111112", // SOL
-                    initialOutputMint: coin.baseToken.address,
-                },
-                // Platform Fee Configuration
-                platformFeeAndAccounts: process.env.NEXT_PUBLIC_FEE_ACCOUNT_SOL ? {
-                    feeBps: Number(process.env.NEXT_PUBLIC_JUPITER_FEE_BPS) || 0,
-                    feeAccounts: new Map([
-                        ["So11111111111111111111111111111111111111112", process.env.NEXT_PUBLIC_FEE_ACCOUNT_SOL],
-                    ]),
-                } : undefined,
-            });
-        } else {
-            window.open(jupiterUrl, "_blank");
-        }
+    const handleCopy = () => {
+        navigator.clipboard.writeText(coin.baseToken.address);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
     };
 
     const formatCurrency = (val?: number) => {
@@ -161,20 +130,41 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
 
             {/* Actions */}
             <div className="grid grid-cols-2 gap-3">
+                {/* 1. Copy CA (Full Width) */}
+                <button
+                    onClick={handleCopy}
+                    className="col-span-2 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 text-xs font-medium text-zinc-300 transition-all border border-zinc-700/50 hover:border-zinc-600 active:scale-[0.98]"
+                >
+                    {copied ? (
+                        <>
+                            <span className="text-green-400">✓</span> Copied CA
+                        </>
+                    ) : (
+                        <>
+                            <span>📋</span> Copy CA
+                        </>
+                    )}
+                </button>
+
+                {/* 2. Dexscreener */}
                 <a
                     href={coin.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-sm font-medium text-zinc-200 transition-colors border border-zinc-700"
+                    className="flex items-center justify-center px-4 py-3 rounded-xl bg-[#1a1d26] hover:bg-[#20242f] text-sm font-bold text-blue-400 transition-colors border border-blue-900/30 hover:border-blue-500/50 shadow-lg shadow-blue-900/10"
                 >
                     Dexscreener ↗
                 </a>
-                <button
-                    onClick={launchTerminal}
-                    className="flex items-center justify-center px-4 py-2 rounded-lg bg-[#19C2A1] hover:bg-[#15A88C] text-sm font-bold text-white transition-colors shadow-[0_0_15px_rgba(25,194,161,0.2)]"
+
+                {/* 3. Axiom */}
+                <a
+                    href={`https://axiom.trade/trade/${coin.baseToken.address}?ref=ilyx`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center px-4 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-sm font-bold text-white transition-colors shadow-lg shadow-indigo-500/20 border border-indigo-400/20"
                 >
-                    Trade on Jupiter
-                </button>
+                    Axiom ⚔️
+                </a>
             </div>
         </div>
     );
