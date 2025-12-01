@@ -120,14 +120,17 @@ export default function Home() {
           <h1 className="text-3xl sm:text-4xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-600">
             viralscan
           </h1>
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
             <p className="text-zinc-500 font-medium">Solana Edition</p>
             <div className="h-4 w-px bg-zinc-800"></div>
             {searchCount !== null && (
               <>
-                <p className="text-zinc-500 font-medium text-sm">
-                  <span className="text-zinc-300 font-bold">{searchCount.toLocaleString()}</span> links searched
-                </p>
+                <div className="flex items-center gap-1.5 bg-orange-500/10 px-2 py-0.5 rounded-full border border-orange-500/20">
+                  <span className="text-sm">🔥</span>
+                  <p className="text-orange-200/80 font-medium text-xs sm:text-sm">
+                    <span className="text-orange-400 font-bold">{searchCount.toLocaleString()}</span> links scanned
+                  </p>
+                </div>
                 <div className="h-4 w-px bg-zinc-800"></div>
               </>
             )}
