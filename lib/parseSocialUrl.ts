@@ -3,6 +3,7 @@ export type ParsedSocialUrl = {
   normalizedUrl: string;
   isValid: boolean;
   error?: string;
+  searchQuery?: string;
 };
 
 export function parseSocialUrl(url: string): ParsedSocialUrl {
@@ -26,10 +27,12 @@ export function parseSocialUrl(url: string): ParsedSocialUrl {
 
     // TikTok
     if (hostname.includes("tiktok.com")) {
+      const searchQuery = urlObj.searchParams.get("q") || undefined;
       return {
         platform: "tiktok",
         normalizedUrl: normalizedUrl,
         isValid: true,
+        searchQuery,
       };
     }
 

@@ -2,7 +2,7 @@ import { smartExtract } from "./smartExtract";
 
 export type CoinCandidate = {
     id: string;
-    source: "mint" | "ticker" | "name" | "link";
+    source: "mint" | "ticker" | "name" | "link" | "url_query";
     raw: string;
     normalized: string;
     confidence: number; // 0-10 score

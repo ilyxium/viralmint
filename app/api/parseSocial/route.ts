@@ -226,6 +226,22 @@ export async function POST(req: NextRequest) {
         // B. Extract Candidates
         const candidates = extractSolanaCandidates(cleanText);
 
+        // Inject Search Query Candidate (High Confidence)
+        if (parsed.searchQuery) {
+            console.log(`Injecting search query candidate: "${parsed.searchQuery}"`);
+            // Normalize the query
+            const normalizedQuery = normalizeText(parsed.searchQuery);
+            if (normalizedQuery) {
+                candidates.push({
+                    id: `query-${normalizedQuery.replace(/\s+/g, '-')}`,
+                    raw: parsed.searchQuery,
+                    normalized: normalizedQuery,
+                    confidence: 10, // Very high confidence for explicit search intent
+                    source: "url_query"
+                });
+            }
+        }
+
         // 5. Resolve via Dexscreener (Solana Only)
         const coinsMap = new Map<string, DexscreenerCoin>();
 

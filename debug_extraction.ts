@@ -8,7 +8,7 @@ import { searchSolanaByQuery, DexscreenerCoin } from "./lib/dexscreener";
 import { normalizeText } from "./lib/normalizeText";
 
 const TARGET_URLS = [
-    "https://www.instagram.com/reel/DRXQt6HkbZu/"
+    "https://www.tiktok.com/@bigdihkt/video/7574449836486085895?q=niche%20baby&t=1764609719674"
 ];
 
 // Mocking the API logic from app/api/parseSocial/route.ts
@@ -130,6 +130,21 @@ async function processUrl(TARGET_URL: string) {
         // 6. Extract Candidates
         console.log("\n--- Step 6: Extract Candidates ---");
         const candidates = extractSolanaCandidates(cleanText);
+
+        // Inject Search Query Candidate (High Confidence)
+        if (parsed.searchQuery) {
+            console.log(`Injecting search query candidate: "${parsed.searchQuery}"`);
+            const normalizedQuery = normalizeText(parsed.searchQuery);
+            if (normalizedQuery) {
+                candidates.push({
+                    id: `query-${normalizedQuery.replace(/\s+/g, '-')}`,
+                    raw: parsed.searchQuery,
+                    normalized: normalizedQuery,
+                    confidence: 10,
+                    source: "url_query"
+                });
+            }
+        }
         console.log(`Found ${candidates.length} candidates:`);
         candidates.forEach(c => {
             console.log(`- [${c.confidence}] ${c.normalized} (Source: ${c.source}, Raw: "${c.raw}")`);

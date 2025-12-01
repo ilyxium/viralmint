@@ -123,8 +123,7 @@ export default function Home() {
           </div>
         </div>
         <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-          <WalletBalance />
-          <WalletMultiButton style={{ backgroundColor: '#27272a', height: '40px', borderRadius: '8px' }} />
+          {/* Wallet Removed */}
         </div>
       </header>
 
