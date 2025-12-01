@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "viralscan",
   description: "Find the coins behind the viral videos.",
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 import { Analytics } from "@vercel/analytics/react";

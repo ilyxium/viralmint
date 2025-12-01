@@ -105,13 +105,13 @@ export default function Home() {
   const isResultMode = hasSearched || coins.length > 0 || !!meta;
 
   return (
-    <div className={`min-h-screen flex flex-col items-center max-w-4xl mx-auto transition-all duration-500 ${isResultMode ? 'p-4 sm:p-8' : 'p-6 sm:p-12'}`}>
-      <header className={`w-full max-w-5xl mx-auto p-4 flex items-center justify-between transition-all duration-500 ${isResultMode ? 'mb-4' : 'mb-8'}`}>
+    <div className={`min-h-screen flex flex-col items-center max-w-4xl mx-auto transition-all duration-500 ${isResultMode ? 'p-4 sm:p-8' : 'p-4 sm:p-6 md:p-12'}`}>
+      <header className={`w-full max-w-5xl mx-auto px-4 py-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition-all duration-500 ${isResultMode ? 'mb-4' : 'mb-6 sm:mb-8'}`}>
         <div className="flex flex-col">
-          <h1 className="text-4xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-600">
+          <h1 className="text-3xl sm:text-4xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-600">
             viralscan
           </h1>
-          <div className="flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-3">
             <p className="text-zinc-500 font-medium">Solana Edition</p>
             <div className="h-4 w-px bg-zinc-800"></div>
             <div className="flex items-center gap-2">
@@ -122,7 +122,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
           <WalletBalance />
           <WalletMultiButton style={{ backgroundColor: '#27272a', height: '40px', borderRadius: '8px' }} />
         </div>
@@ -143,21 +143,22 @@ export default function Home() {
           )}
         </div>
 
+
         {/* Search Input */}
-        <form onSubmit={handleSubmit} className={`w-full max-w-xl relative group transition-all duration-500 ${isResultMode ? 'mb-8' : 'mb-16'}`}>
+        <form onSubmit={handleSubmit} className={`w-full max-w-xl px-4 relative group transition-all duration-500 ${isResultMode ? 'mb-8' : 'mb-16'}`}>
           <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl opacity-20 group-hover:opacity-40 transition duration-500 blur"></div>
-          <div className="relative flex items-center bg-zinc-900 rounded-xl p-2 border border-zinc-800 shadow-2xl">
+          <div className="relative flex items-center bg-zinc-900 rounded-xl p-1.5 sm:p-2 border border-zinc-800 shadow-2xl">
             <input
               type="text"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="Paste TikTok or Reel link..."
-              className="flex-1 bg-transparent border-none text-zinc-100 placeholder-zinc-500 focus:ring-0 px-4 py-3 text-lg"
+              className="flex-1 bg-transparent border-none text-zinc-100 placeholder-zinc-500 focus:ring-0 px-2 sm:px-4 py-2 sm:py-3 text-sm sm:text-lg min-w-0"
             />
             <button
               type="submit"
               disabled={isLoading || !url.trim()}
-              className="bg-zinc-100 hover:bg-white text-zinc-950 font-bold px-6 py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-zinc-100 hover:bg-white text-zinc-950 font-bold px-3 sm:px-6 py-2 sm:py-3 rounded-lg text-xs sm:text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap shrink-0"
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">
@@ -165,7 +166,7 @@ export default function Home() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  Analyzing
+                  <span className="hidden sm:inline">Analyzing</span>
                 </span>
               ) : (
                 "Analyze"

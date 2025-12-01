@@ -40,30 +40,30 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
     };
 
     return (
-        <div className={`rounded-xl border p-4 transition-colors ${isMostRelevant ? 'bg-zinc-900/80 border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'bg-zinc-900/60 border-zinc-800 hover:border-zinc-700'}`}>
+        <div className={`rounded-xl border p-3 sm:p-4 transition-colors ${isMostRelevant ? 'bg-zinc-900/80 border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'bg-zinc-900/60 border-zinc-800 hover:border-zinc-700'}`}>
             {/* Header */}
-            <div className="flex items-start justify-between mb-4 gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3 sm:mb-4 gap-2 sm:gap-4">
                 <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-lg text-zinc-100 truncate">
+                    <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-bold text-base sm:text-lg text-zinc-100 truncate">
                             {coin.baseToken.name}
                         </h3>
-                        <span className="text-sm text-zinc-400 shrink-0">
+                        <span className="text-xs sm:text-sm text-zinc-400 shrink-0">
                             {coin.baseToken.symbol}
                         </span>
                     </div>
-                    <div className="flex items-center gap-x-2 gap-y-1 mt-1 flex-wrap">
-                        <span className="text-[10px] font-mono text-zinc-500 bg-zinc-900/50 px-1.5 py-0.5 rounded border border-zinc-800">
+                    <div className="flex items-center gap-x-1.5 gap-y-1 flex-wrap">
+                        <span className="text-[9px] sm:text-[10px] font-mono text-zinc-500 bg-zinc-900/50 px-1.5 py-0.5 rounded border border-zinc-800">
                             {coin.baseToken.address.slice(0, 4)}...
                             {coin.baseToken.address.slice(-4)}
                         </span>
-                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-green-900/30 text-green-400 border border-green-900/50">
+                        <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-green-900/30 text-green-400 border border-green-900/50">
                             SOLANA
                         </span>
 
                         {/* DEX Badge */}
                         {coin.dexId && (
-                            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 uppercase ${coin.dexId === 'raydium' ? 'bg-blue-900/30 text-blue-400 border-blue-900/50' :
+                            <span className={`text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 uppercase ${coin.dexId === 'raydium' ? 'bg-blue-900/30 text-blue-400 border-blue-900/50' :
                                 coin.dexId === 'pump' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-900/50' :
                                     coin.dexId === 'orca' ? 'bg-yellow-900/30 text-yellow-400 border-yellow-900/50' :
                                         coin.dexId === 'meteora' ? 'bg-pink-900/30 text-pink-400 border-pink-900/50' :
@@ -74,22 +74,22 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
                         )}
 
                         {isMostRelevant && (
-                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-purple-900/30 text-purple-400 border border-purple-900/50 flex items-center gap-1 shadow-[0_0_10px_rgba(168,85,247,0.2)]">
+                            <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-purple-900/30 text-purple-400 border border-purple-900/50 flex items-center gap-1 shadow-[0_0_10px_rgba(168,85,247,0.2)]">
                                 💎 Most Relevant
                             </span>
                         )}
                         {coin.isHighestFDV && (
-                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-yellow-900/30 text-yellow-400 border border-yellow-900/50 flex items-center gap-1">
+                            <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-yellow-900/30 text-yellow-400 border border-yellow-900/50 flex items-center gap-1">
                                 🏆 High Cap
                             </span>
                         )}
                         {coin.isHighestVolume && (
-                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-orange-900/30 text-orange-400 border border-orange-900/50 flex items-center gap-1">
+                            <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-orange-900/30 text-orange-400 border border-orange-900/50 flex items-center gap-1">
                                 🔥 High Vol
                             </span>
                         )}
                         {coin.matchConfidence !== undefined && (
-                            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 ${coin.matchConfidence >= 8 ? 'bg-emerald-900/30 text-emerald-400 border-emerald-900/50' :
+                            <span className={`text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 ${coin.matchConfidence >= 8 ? 'bg-emerald-900/30 text-emerald-400 border-emerald-900/50' :
                                 coin.matchConfidence >= 5 ? 'bg-yellow-900/30 text-yellow-400 border-yellow-900/50' :
                                     'bg-red-900/30 text-red-400 border-red-900/50'
                                 }`}>
@@ -98,11 +98,11 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
                         )}
                     </div>
                 </div>
-                <div className="text-right shrink-0">
-                    <div className="text-xl font-bold text-zinc-100">
+                <div className="text-left sm:text-right shrink-0">
+                    <div className="text-lg sm:text-xl font-bold text-zinc-100">
                         {formatPrice(coin.priceUsd)}
                     </div>
-                    <div className="text-xs text-zinc-500">Price USD</div>
+                    <div className="text-[10px] sm:text-xs text-zinc-500">Price USD</div>
                 </div>
             </div>
 
