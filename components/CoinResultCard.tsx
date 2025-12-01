@@ -52,8 +52,8 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
                             {coin.baseToken.symbol}
                         </span>
                     </div>
-                    <div className="flex items-center gap-2 mt-1 flex-wrap">
-                        <span className="text-xs font-mono text-zinc-500 bg-zinc-900/50 px-1.5 py-0.5 rounded border border-zinc-800">
+                    <div className="flex items-center gap-x-2 gap-y-1 mt-1 flex-wrap">
+                        <span className="text-[10px] font-mono text-zinc-500 bg-zinc-900/50 px-1.5 py-0.5 rounded border border-zinc-800">
                             {coin.baseToken.address.slice(0, 4)}...
                             {coin.baseToken.address.slice(-4)}
                         </span>
@@ -93,7 +93,7 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
                                 coin.matchConfidence >= 5 ? 'bg-yellow-900/30 text-yellow-400 border-yellow-900/50' :
                                     'bg-red-900/30 text-red-400 border-red-900/50'
                                 }`}>
-                                Confidence Score: {coin.matchConfidence}
+                                Conf: {coin.matchConfidence}
                             </span>
                         )}
                     </div>

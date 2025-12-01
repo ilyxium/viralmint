@@ -8,7 +8,7 @@ import { searchSolanaByQuery, DexscreenerCoin } from "./lib/dexscreener";
 import { normalizeText } from "./lib/normalizeText";
 
 const TARGET_URLS = [
-    "https://www.instagram.com/reel/DRgiKFSAaY3/?igsh=MWxkdDMwMDJ0Ynkycw=="
+    "https://www.instagram.com/reel/DRXQt6HkbZu/"
 ];
 
 // Mocking the API logic from app/api/parseSocial/route.ts

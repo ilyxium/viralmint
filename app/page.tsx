@@ -65,7 +65,7 @@ export default function Home() {
     if (showLowCap && fdv < minMcap) return true;
     if (showHighCap && fdv > maxMcap) return true;
     return fdv >= minMcap && fdv <= maxMcap;
-  });
+  }).sort((a, b) => (b.liquidity?.usd || 0) - (a.liquidity?.usd || 0));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -102,9 +102,11 @@ export default function Home() {
     }
   };
 
+  const isResultMode = hasSearched || coins.length > 0 || !!meta;
+
   return (
-    <div className="min-h-screen flex flex-col items-center p-4 sm:p-8 max-w-4xl mx-auto">
-      <header className="w-full max-w-5xl mx-auto p-4 flex items-center justify-between">
+    <div className={`min-h-screen flex flex-col items-center max-w-4xl mx-auto transition-all duration-500 ${isResultMode ? 'p-4 sm:p-8' : 'p-6 sm:p-12'}`}>
+      <header className={`w-full max-w-5xl mx-auto p-4 flex items-center justify-between transition-all duration-500 ${isResultMode ? 'mb-4' : 'mb-8'}`}>
         <div className="flex flex-col">
           <h1 className="text-4xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-600">
             viralscan
@@ -128,19 +130,21 @@ export default function Home() {
 
       {/* Hero Section */}
       <main className="flex-1 flex flex-col items-center w-full">
-        <div className="text-center mb-10 w-full max-w-2xl">
-          <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight text-white">
+        <div className={`text-center w-full max-w-2xl transition-all duration-500 ${isResultMode ? 'mb-6' : 'mb-16'}`}>
+          <h1 className="text-4xl sm:text-5xl font-extrabold mb-6 tracking-tight text-white">
             Find the <span className="text-[#9945FF]">Solana</span> coin <br />
             from any video.
           </h1>
-          <p className="text-lg text-zinc-400 leading-relaxed">
-            Paste a TikTok or Reel. <br className="hidden sm:block" />
-            Hunt the ticker. Trade the trend.
-          </p>
+          {!isResultMode && (
+            <p className="text-lg text-zinc-400 leading-relaxed animate-in fade-in slide-in-from-bottom-2 duration-500">
+              Paste a TikTok or Reel. <br className="hidden sm:block" />
+              Hunt the ticker. Trade the trend.
+            </p>
+          )}
         </div>
 
         {/* Search Input */}
-        <form onSubmit={handleSubmit} className="w-full max-w-xl mb-12 relative group">
+        <form onSubmit={handleSubmit} className={`w-full max-w-xl relative group transition-all duration-500 ${isResultMode ? 'mb-8' : 'mb-16'}`}>
           <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl opacity-20 group-hover:opacity-40 transition duration-500 blur"></div>
           <div className="relative flex items-center bg-zinc-900 rounded-xl p-2 border border-zinc-800 shadow-2xl">
             <input
