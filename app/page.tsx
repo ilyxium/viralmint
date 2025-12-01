@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DexscreenerCoin } from "@/lib/dexscreener";
 import { ParseSocialResponse } from "@/app/api/parseSocial/route";
 import { CoinCandidate } from "@/lib/extractSolanaTokens";
@@ -104,6 +104,15 @@ export default function Home() {
 
   const isResultMode = hasSearched || coins.length > 0 || !!meta;
 
+  const [searchCount, setSearchCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch("/api/stats")
+      .then((res) => res.json())
+      .then((data) => setSearchCount(data.count))
+      .catch((err) => console.error("Failed to fetch stats", err));
+  }, []);
+
   return (
     <div className={`min-h-screen flex flex-col items-center max-w-4xl mx-auto transition-all duration-500 ${isResultMode ? 'p-4 sm:p-8' : 'p-4 sm:p-6 md:p-12'}`}>
       <header className={`w-full max-w-5xl mx-auto px-4 py-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition-all duration-500 ${isResultMode ? 'mb-4' : 'mb-6 sm:mb-8'}`}>
@@ -114,6 +123,14 @@ export default function Home() {
           <div className="hidden sm:flex items-center gap-3">
             <p className="text-zinc-500 font-medium">Solana Edition</p>
             <div className="h-4 w-px bg-zinc-800"></div>
+            {searchCount !== null && (
+              <>
+                <p className="text-zinc-500 font-medium text-sm">
+                  <span className="text-zinc-300 font-bold">{searchCount.toLocaleString()}</span> links searched
+                </p>
+                <div className="h-4 w-px bg-zinc-800"></div>
+              </>
+            )}
             <div className="flex items-center gap-2">
               {/* X Link Removed */}
               <a href="#" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors">

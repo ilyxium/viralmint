@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { kv } from "@vercel/kv";
 import * as cheerio from "cheerio";
 import LanguageDetect from "languagedetect";
 import { translate } from "google-translate-api-x";
@@ -25,10 +26,20 @@ export type ParseSocialResponse = {
     coins?: DexscreenerCoin[];
 };
 
-export async function POST(req: NextRequest) {
+export const maxDuration = 60; // Allow longer timeout for scraping
+
+export async function POST(req: Request) {
     try {
-        const body = await req.json();
-        const { url } = body;
+        const { url } = await req.json();
+
+        // Increment global search counter (fire and forget)
+        try {
+            await kv.incr("search_count");
+        } catch (e) {
+            console.error("Failed to increment search count:", e);
+        }
+
+        console.log(`\n=== PROCESSING URL: ${url} ===`);
 
         // 1. Parse and validate URL
         const parsed = parseSocialUrl(url);
