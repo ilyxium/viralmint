@@ -21,6 +21,7 @@
     "compromise": "^14.14.4",
     "google-translate-api-x": "^10.7.2",
     "languagedetect": "^2.0.0",
+    "nanoid": "^5.1.6",
     "next": "16.0.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",

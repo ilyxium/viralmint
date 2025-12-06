@@ -23,6 +23,8 @@ export default function Home() {
   const [coins, setCoins] = useState<DexscreenerCoin[]>([]);
   const [candidates, setCandidates] = useState<CoinCandidate[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
+  const [isSharing, setIsSharing] = useState(false);
 
   // State for filters
   const [minMcap, setMinMcap] = useState<number>(10000);
@@ -102,6 +104,35 @@ export default function Home() {
       setError("Failed to connect to the server.");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleShare = async () => {
+    if (!url || coins.length === 0) return;
+
+    setIsSharing(true);
+    try {
+      const res = await fetch("/api/share", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url, coins, meta }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        const fullUrl = `${window.location.origin}${data.shareUrl}`;
+        setShareUrl(fullUrl);
+
+        // Copy to clipboard
+        await navigator.clipboard.writeText(fullUrl);
+        alert("Share link copied to clipboard!");
+      } else {
+        alert("Failed to create share link");
+      }
+    } catch (err) {
+      alert("Failed to create share link");
+    } finally {
+      setIsSharing(false);
     }
   };
 
@@ -234,12 +265,40 @@ export default function Home() {
 
             {/* Video Summary */}
             {meta && (
-              <section>
-                <h2 className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-3">
-                  Video Source
-                </h2>
-                <VideoSummaryCard meta={meta} />
-              </section>
+              <div className="space-y-4">
+                <section>
+                  <h2 className="text-sm font-bold text-zinc-500 uppercase tracking-wider mb-3">
+                    Video Source
+                  </h2>
+                  <VideoSummaryCard meta={meta} />
+                </section>
+
+                {/* Share Button */}
+                {coins.length > 0 && (
+                  <button
+                    onClick={handleShare}
+                    disabled={isSharing}
+                    className="w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-100 font-bold px-4 py-3 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {isSharing ? (
+                      <>
+                        <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        Creating Share Link...
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                        </svg>
+                        Share Results
+                      </>
+                    )}
+                  </button>
+                )}
+              </div>
             )}
 
             {/* Coin Results */}
