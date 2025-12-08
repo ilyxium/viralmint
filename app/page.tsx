@@ -190,10 +190,8 @@ export default function Home() {
               </>
             )}
             <div className="flex items-center gap-2">
-              <a href="#" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors" title="DexScreener">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+              <a href="#" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors opacity-80 hover:opacity-100" title="DexScreener">
+                <img src="/dexscreener.png" alt="DexScreener" className="w-5 h-5 object-contain" />
               </a>
               <a href="https://x.com/viralscansolana" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
