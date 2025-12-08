@@ -8,7 +8,7 @@ import { searchSolanaByQuery, DexscreenerCoin } from "./lib/dexscreener";
 import { normalizeText } from "./lib/normalizeText";
 
 const TARGET_URLS = [
-    "https://www.tiktok.com/@bigdihkt/video/7574449836486085895?q=niche%20baby&t=1764609719674"
+    "https://www.tiktok.com/t/ZP8U6QbLN/"
 ];
 
 // Mocking the API logic from app/api/parseSocial/route.ts
@@ -167,9 +167,9 @@ async function processUrl(TARGET_URL: string) {
             // Apply Filtering Logic
             if (candidate.confidence < 5) {
                 const filtered = results.filter(coin => {
-                    const q = query.toLowerCase();
-                    const symbol = coin.baseToken.symbol.toLowerCase();
-                    const name = coin.baseToken.name.toLowerCase();
+                    const q = query.toLowerCase().replace(/\s+/g, '');
+                    const symbol = coin.baseToken.symbol.toLowerCase().replace(/\s+/g, '');
+                    const name = coin.baseToken.name.toLowerCase().replace(/\s+/g, '');
 
                     // SOFT BLOCK CHECK
                     if (candidate.confidence === 0.5) {
@@ -180,9 +180,9 @@ async function processUrl(TARGET_URL: string) {
                         return pass;
                     }
 
-                    // Normal Low Confidence Check
-                    const pass = symbol === q || name.startsWith(q);
-                    if (!pass) console.log(`    Filtered out ${symbol}: Low Conf Mismatch (Symbol: ${symbol}, Query: ${q})`);
+                    // Normal Low Confidence Check - allow partial matches with space normalization
+                    const pass = symbol === q || name.startsWith(q) || symbol.startsWith(q);
+                    if (!pass) console.log(`    Filtered out ${coin.baseToken.symbol}: Low Conf Mismatch (Symbol: ${coin.baseToken.symbol}, Query: ${candidate.normalized})`);
                     return pass;
                 });
 

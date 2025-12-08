@@ -273,41 +273,48 @@ export async function POST(req: Request) {
 
         // Process candidates
         // We search for them, then rank/filter
-        const searchPromises = candidates.map(async (candidate) => {
+        await Promise.all(candidates.map(async (candidate) => {
             let query = candidate.normalized;
             const results = await searchSolanaByQuery(query);
 
-            // Filter based on confidence
+            // Apply stricter filtering for low-confidence candidates
             if (candidate.confidence < 5) {
                 const filtered = results.filter(coin => {
-                    const q = query.toLowerCase();
-                    const symbol = coin.baseToken.symbol.toLowerCase();
-                    const name = coin.baseToken.name.toLowerCase();
+                    const q = query.toLowerCase().replace(/\s+/g, '');
+                    const symbol = coin.baseToken.symbol.toLowerCase().replace(/\s+/g, '');
+                    const name = coin.baseToken.name.toLowerCase().replace(/\s+/g, '');
 
-                    // SOFT BLOCK CHECK (Confidence 0.5)
-                    // Require EXACT SYMBOL MATCH + HIGH LIQUIDITY ($100k+)
+                    // SOFT BLOCK CHECK (confidence 0.5)
                     if (candidate.confidence === 0.5) {
                         const isExactSymbol = symbol === q;
                         const hasHighLiq = (coin.liquidity?.usd || 0) > 100000;
                         return isExactSymbol && hasHighLiq;
                     }
 
-                    // Normal Low Confidence Check
-                    return symbol === q || name.startsWith(q);
+                    // Normal Low Confidence Check - allow partial matches with space normalization
+                    const matches = symbol === q || name.startsWith(q) || symbol.startsWith(q);
+
+                    return matches;
                 });
 
-                // Attach confidence
-                // If it passed the Soft Block check, boost it to 7 (It's a real, high-liq coin)
-                const finalConfidence = candidate.confidence === 0.5 ? 7 : candidate.confidence;
-                return filtered.map(c => ({ ...c, matchConfidence: finalConfidence }));
+                filtered.forEach(c => {
+                    const existing = coinsMap.get(c.pairAddress);
+                    const finalConfidence = candidate.confidence === 0.5 ? 7 : candidate.confidence;
+                    if (!existing || finalConfidence > (existing.matchConfidence || 0)) {
+                        coinsMap.set(c.pairAddress, { ...c, matchConfidence: finalConfidence });
+                    }
+                });
+            } else {
+                // For higher confidence candidates, add all results directly
+                results.forEach(c => {
+                    const existing = coinsMap.get(c.pairAddress);
+                    const finalConfidence = candidate.confidence;
+                    if (!existing || finalConfidence > (existing.matchConfidence || 0)) {
+                        coinsMap.set(c.pairAddress, { ...c, matchConfidence: finalConfidence });
+                    }
+                });
             }
-
-            // Attach confidence
-            return results.map(c => ({ ...c, matchConfidence: candidate.confidence }));
-        });
-
-        const searchResults = await Promise.all(searchPromises);
-        searchResults.forEach(addCoins);
+        }));
 
         // Convert to array and Sort
         const allCoins = Array.from(coinsMap.values()).sort((a, b) => {

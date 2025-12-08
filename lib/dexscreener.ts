@@ -47,6 +47,8 @@ export async function searchSolanaByQuery(query: string): Promise<DexscreenerCoi
             (pair: any) => pair.chainId === "solana" && (pair.liquidity?.usd || 0) > 6000
         );
 
+        console.log(`[DEXSCREENER] Query "${query}": ${data.pairs?.length || 0} total pairs, ${solanaPairs.length} Solana pairs >$6k`);
+
         // Map to our type
         const coins: DexscreenerCoin[] = solanaPairs.map((pair: any) => ({
             pairAddress: pair.pairAddress,
@@ -74,12 +76,16 @@ export async function searchSolanaByQuery(query: string): Promise<DexscreenerCoi
         }));
 
         // Sort by relevance:
-        // 1. Exact symbol match
+        // 1. Exact symbol match (with space normalization)
         // 2. Pump.fun (User preference)
         // 3. FDV descending
         coins.sort((a, b) => {
-            const aExact = a.baseToken.symbol.toLowerCase() === query.toLowerCase();
-            const bExact = b.baseToken.symbol.toLowerCase() === query.toLowerCase();
+            const queryNorm = query.toLowerCase().replace(/\s+/g, '');
+            const aSymNorm = a.baseToken.symbol.toLowerCase().replace(/\s+/g, '');
+            const bSymNorm = b.baseToken.symbol.toLowerCase().replace(/\s+/g, '');
+
+            const aExact = aSymNorm === queryNorm;
+            const bExact = bSymNorm === queryNorm;
 
             if (aExact && !bExact) return -1;
             if (!aExact && bExact) return 1;

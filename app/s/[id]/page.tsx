@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { DexscreenerCoin } from "@/lib/dexscreener";
 import { CoinResultCard } from "@/components/CoinResultCard";
 import { VideoSummaryCard } from "@/components/VideoSummaryCard";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 
 type ShareData = {
@@ -18,25 +19,24 @@ type ShareData = {
     timestamp: number;
 };
 
-export default function SharedResultsPage({ params }: { params: Promise<{ id: string }> }) {
-    const [id, setId] = useState<string | null>(null);
+export default function SharedResultsPage() {
+    const params = useParams();
+    const id = params.id as string;
+
     const [data, setData] = useState<ShareData | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        params.then(({ id: paramId }) => {
-            setId(paramId);
-            fetch(`/api/share/${paramId}`)
-                .then((res) => {
-                    if (!res.ok) throw new Error("Share link not found or expired");
-                    return res.json();
-                })
-                .then((data) => setData(data))
-                .catch((err) => setError(err.message))
-                .finally(() => setIsLoading(false));
-        });
-    }, [params]);
+        fetch(`/api/share/${id}`)
+            .then((res) => {
+                if (!res.ok) throw new Error("Share link not found or expired");
+                return res.json();
+            })
+            .then((data) => setData(data))
+            .catch((err) => setError(err.message))
+            .finally(() => setIsLoading(false));
+    }, [id]);
 
     if (isLoading) {
         return (
