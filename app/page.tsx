@@ -161,13 +161,10 @@ export default function Home() {
       .catch((err) => console.error("Failed to fetch stats", err));
   };
 
+  // Fetch stats on mount and poll every 15 seconds
   useEffect(() => {
-    // Initial fetch
     fetchStats();
-
-    // Poll every 5 seconds
-    const interval = setInterval(fetchStats, 5000);
-
+    const interval = setInterval(fetchStats, 15000); // Poll every 15 seconds
     return () => clearInterval(interval);
   }, []);
 

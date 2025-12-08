@@ -20,10 +20,10 @@ export async function POST(req: Request) {
 // GET: Retrieve shared search results
 export async function GET(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = params;
+        const { id } = await params;
         const shareData = await kv.get(`share:${id}`);
 
         if (!shareData) {
