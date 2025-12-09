@@ -190,7 +190,7 @@ export default function Home() {
               </>
             )}
             <div className="flex items-center gap-2">
-              <a href="#" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors opacity-80 hover:opacity-100" title="DexScreener">
+              <a href="https://dexscreener.com/solana/8ztuxoudfquunxdcuhkdmitcy8n8fsxmtcpk4etspump" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors opacity-80 hover:opacity-100" title="DexScreener">
                 <img src="/dexscreener.png" alt="DexScreener" className="w-5 h-5 object-contain" />
               </a>
               <a href="https://x.com/viralscansolana" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors">
