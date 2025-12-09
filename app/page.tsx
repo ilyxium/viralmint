@@ -186,19 +186,8 @@ export default function Home() {
                     <span className="text-orange-400 font-bold">{searchCount.toLocaleString()}</span> links scanned
                   </p>
                 </div>
-                <div className="h-4 w-px bg-zinc-800"></div>
               </>
             )}
-            <div className="flex items-center gap-2">
-              <a href="https://dexscreener.com/solana/8ztuxoudfquunxdcuhkdmitcy8n8fsxmtcpk4etspump" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors opacity-80 hover:opacity-100" title="DexScreener">
-                <img src="/dexscreener.png" alt="DexScreener" className="w-5 h-5 object-contain" />
-              </a>
-              <a href="https://x.com/viralscansolana" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-white transition-colors">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
-            </div>
           </div>
         </div>
         <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
