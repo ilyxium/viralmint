@@ -1,23 +1,72 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-grotesk);
+  --font-mono: var(--font-mono);
+
+  --color-rot-bg: #050505;
+  --color-rot-panel: #0a0a0b;
+  --color-rot-border: #1a1a1c;
+
+  --color-slime-500: #9d00ff;
+  /* Deep Purple */
+  --color-slime-400: #b538ff;
+  --color-toxic-500: #ccff00;
+  /* Toxic Green */
+  --color-toxic-400: #d9ff33;
+  --color-decay-500: #2a2a2e;
 }
 
 :root {
-  --background: #09090b;
-  /* zinc-950 */
-  --foreground: #f4f4f5;
-  /* zinc-100 */
+  --background: var(--color-rot-bg);
+  --foreground: #e4e4e7;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(157, 0, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 10%, rgba(204, 255, 0, 0.03) 0%, transparent 30%);
 }
 
+/* Glitch Animation */
+@keyframes glitch {
+  0% {
+    transform: translate(0)
+  }
+
+  20% {
+    transform: translate(-2px, 2px)
+  }
+
+  40% {
+    transform: translate(-2px, -2px)
+  }
+
+  60% {
+    transform: translate(2px, 2px)
+  }
+
+  80% {
+    transform: translate(2px, -2px)
+  }
+
+  100% {
+    transform: translate(0)
+  }
+}
+
+.animate-glitch {
+  animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+}
+
+.hover-glitch:hover {
+  animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+}
+
+/* Shake Animation (Keep existing) */
 @keyframes shake {
 
   0%,
@@ -43,4 +92,610 @@ body {
 
 .animate-shake {
   animation: shake 0.5s ease-in-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-rot-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-decay-500);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-slime-500);
+}
+
+/* Intro Animations */
+@keyframes noise {
+  0% {
+    transform: translate(0, 0)
+  }
+
+  10% {
+    transform: translate(-5%, -5%)
+  }
+
+  20% {
+    transform: translate(-10%, 5%)
+  }
+
+  30% {
+    transform: translate(5%, -10%)
+  }
+
+  40% {
+    transform: translate(-5%, 15%)
+  }
+
+  50% {
+    transform: translate(-10%, 5%)
+  }
+
+  60% {
+    transform: translate(15%, 0)
+  }
+
+  70% {
+    transform: translate(0, 10%)
+  }
+
+  80% {
+    transform: translate(-15%, 0)
+  }
+
+  90% {
+    transform: translate(10%, 5%)
+  }
+
+  100% {
+    transform: translate(5%, 0)
+  }
+}
+
+.animate-noise {
+  animation: noise 0.5s steps(10) infinite;
+}
+
+@keyframes scan-scroll {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scan-scroll {
+  animation: scan-scroll 2s linear infinite;
+}
+
+@keyframes lens-search {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.8);
+  }
+
+  25% {
+    transform: translate(-45%, -55%) rotate(-5deg) scale(0.9);
+  }
+
+  50% {
+    transform: translate(-55%, -45%) rotate(5deg) scale(0.9);
+  }
+
+  75% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1.1);
+  }
+
+  90% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(20);
+  }
+}
+
+.animate-lens-search {
+  animation: lens-search 2.0s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+
+/* Split Animation Phases */
+@keyframes lens-enter {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.0);
+    opacity: 0;
+  }
+
+  60% {
+    transform: translate(-50%, -50%) rotate(5deg) scale(1.1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.9);
+    opacity: 1;
+  }
+}
+
+.animate-lens-enter {
+  animation: lens-enter 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Looped version for Search Loader */
+@keyframes lens-loop {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.9);
+  }
+
+  25% {
+    transform: translate(-48%, -52%) rotate(-3deg) scale(0.95);
+  }
+
+  50% {
+    transform: translate(-52%, -48%) rotate(3deg) scale(0.95);
+  }
+
+  75% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1.0);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.9);
+  }
+}
+
+.animate-lens-loop {
+  animation: lens-loop 1.5s ease-in-out infinite;
+}
+
+@keyframes lens-exit {
+  0% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 1;
+  }
+
+  20% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(30);
+    opacity: 0;
+  }
+}
+
+.animate-lens-exit {
+  animation: lens-exit 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+
+@keyframes chromatic {
+  0% {
+    text-shadow: 2px 0 #9d00ff, -2px 0 #ccff00;
+  }
+
+  25% {
+    text-shadow: -2px 0 #9d00ff, 2px 0 #ccff00;
+  }
+
+  50% {
+    text-shadow: 2px 0 #9d00ff, -2px 0 #ccff00;
+  }
+
+  75% {
+    text-shadow: -2px 0 #9d00ff, 2px 0 #ccff00;
+  }
+
+  100% {
+    text-shadow: 2px 0 #9d00ff, -2px 0 #ccff00;
+  }
+}
+
+.animate-chromatic {
+  animation: chromatic 0.2s steps(2) infinite;
+}
+
+/* Search Interaction Animations */
+
+/* 1. Slime Ripple */
+@keyframes ripple-out {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+    border-color: var(--color-slime-500);
+    box-shadow: 0 0 0 0 rgba(157, 0, 255, 0.4);
+  }
+
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+    border-color: var(--color-toxic-500);
+    box-shadow: 0 0 20px 10px rgba(157, 0, 255, 0.1);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    border-color: var(--color-slime-500);
+    box-shadow: 0 0 0 0 rgba(157, 0, 255, 0);
+  }
+}
+
+.animate-ripple {
+  animation: ripple-out 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 2. Text Decay (Glitch flickers) */
+@keyframes text-decay {
+  0% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: skewX(0deg);
+  }
+
+  20% {
+    opacity: 0.8;
+    filter: blur(1px);
+    transform: skewX(10deg);
+    color: var(--color-toxic-500);
+  }
+
+  40% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: skewX(-10deg);
+    color: var(--color-slime-500);
+  }
+
+  60% {
+    opacity: 0.9;
+    filter: blur(2px);
+    transform: skewX(5deg);
+  }
+
+  80% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: skewX(0deg);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: skewX(0deg);
+  }
+}
+
+.animate-text-decay {
+  animation: text-decay 0.4s steps(5);
+}
+
+/* 3. Scanning Beam Sweep */
+@keyframes scan-beam {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+    background: linear-gradient(90deg, transparent, var(--color-toxic-500), transparent);
+  }
+
+  90% {
+    opacity: 1;
+    background: linear-gradient(90deg, transparent, var(--color-slime-500), transparent);
+  }
+
+  100% {
+    left: 200%;
+    opacity: 0;
+  }
+}
+
+.animate-scan-beam {
+  animation: scan-beam 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* 4. Rot Dissolve (Transition to results) */
+@keyframes rot-dissolve {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    filter: blur(4px);
+  }
+
+  50% {
+    filter: blur(2px) contrast(1.2);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.animate-rot-appear {
+  animation: rot-dissolve 0.8s ease-out forwards;
+}
+
+/* 5. Input Shake/Snap on Paste */
+@keyframes input-snap {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-input-snap {
+  animation: input-snap 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* --- Slime Reveal & Micro-Interactions --- */
+
+/* Slime Peel Mask */
+@keyframes slime-peel {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+  }
+
+  40% {
+    /* Start peeling from top-left */
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  }
+
+  100% {
+    /* Fully revealed */
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    opacity: 0;
+  }
+}
+
+/* Snap to Focus */
+@keyframes snap-focus {
+  0% {
+    filter: blur(8px);
+    transform: scale(0.98);
+    opacity: 0;
+  }
+
+  60% {
+    filter: blur(4px);
+    transform: scale(0.99);
+    opacity: 1;
+  }
+
+  100% {
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Single Pulse */
+@keyframes pulse-once {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(139, 92, 246, 0);
+  }
+
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(139, 92, 246, 0);
+  }
+}
+
+.animate-slime-peel {
+  animation: slime-peel 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-snap-focus {
+  animation: snap-focus 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.3s;
+  /* Wait for peel to start */
+  opacity: 0;
+  /* Start hidden */
+}
+
+.animate-pulse-once {
+  animation: pulse-once 0.5s ease-out 1s forwards;
+  /* Delay to sync with snap */
+}
+
+/* Wet Hover State */
+.hover-wet {
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  /* Viscous feel */
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-wet:hover {
+  transform: translateY(2px) scale(0.995);
+  /* Heavy drag */
+  filter: brightness(1.1);
+}
+
+.hover-wet::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+  transform: scale(0);
+  transition: transform 0.6s ease-out;
+  pointer-events: none;
+}
+
+.hover-wet:hover::before {
+  transform: scale(1);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Purple Glow */
+.glow-purple {
+  box-shadow: 0 0 20px -5px rgba(139, 92, 246, 0.15);
+  /* Toxic Purple */
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.glow-purple:hover {
+  box-shadow: 0 0 30px -5px rgba(139, 92, 246, 0.3);
+  border-color: rgba(139, 92, 246, 0.6);
+}
+
+/* --- Ambient Effects --- */
+
+/* Background Noise Animation */
+@keyframes noise-shift {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-5%, -5%);
+  }
+
+  20% {
+    transform: translate(-10%, 5%);
+  }
+
+  30% {
+    transform: translate(5%, -10%);
+  }
+
+  40% {
+    transform: translate(-5%, 15%);
+  }
+
+  50% {
+    transform: translate(-10%, 5%);
+  }
+
+  60% {
+    transform: translate(15%, 0);
+  }
+
+  70% {
+    transform: translate(0, 10%);
+  }
+
+  80% {
+    transform: translate(-15%, 0);
+  }
+
+  90% {
+    transform: translate(10%, 5%);
+  }
+
+  100% {
+    transform: translate(5%, 0);
+  }
+}
+
+/* Particle Float */
+@keyframes float-up {
+  0% {
+    transform: translateY(110vh) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: var(--particle-opacity, 0.5);
+  }
+
+  90% {
+    opacity: var(--particle-opacity, 0.5);
+  }
+
+  100% {
+    transform: translateY(-10vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Global Glitch Flicker (More Intense) */
+@keyframes global-glitch {
+
+  0%,
+  96% {
+    transform: translate(0);
+    filter: none;
+    opacity: 1;
+  }
+
+  96.1% {
+    transform: translate(-4px, 2px);
+    filter: hue-rotate(90deg) contrast(1.5) blur(1px);
+    opacity: 0.9;
+  }
+
+  96.3% {
+    transform: translate(4px, -2px);
+    filter: hue-rotate(-90deg) contrast(2);
+    opacity: 0.9;
+  }
+
+  96.5% {
+    transform: translate(-2px, 0);
+    filter: invert(0.2);
+    opacity: 1;
+  }
+
+  96.7% {
+    transform: translate(0);
+    filter: none;
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.animate-noise {
+  animation: noise-shift 0.5s steps(3) infinite;
+  /* Faster, jittery noise */
+}
+
+.animate-float {
+  animation: float-up var(--float-duration, 20s) linear infinite;
+}
+
+.animate-global-glitch {
+  animation: global-glitch 25s linear infinite;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+
+  .animate-noise,
+  .animate-float,
+  .animate-global-glitch {
+    animation: none !important;
+    display: none !important;
+  }
 }

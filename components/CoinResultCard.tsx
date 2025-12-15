@@ -40,33 +40,33 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
     };
 
     return (
-        <div className={`rounded-xl border p-3 sm:p-4 transition-colors ${isMostRelevant ? 'bg-zinc-900/80 border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'bg-zinc-900/60 border-zinc-800 hover:border-zinc-700'}`}>
+        <div className={`rounded-lg border p-3 sm:p-4 transition-all hover-wet animate-pulse-once ${isMostRelevant ? 'bg-[#0a0a0b] border-slime-500 shadow-[0_0_20px_rgba(157,0,255,0.1)] glow-purple' : 'bg-[#0a0a0b] border-decay-500 hover:border-zinc-700 glow-purple'}`}>
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3 sm:mb-4 gap-2 sm:gap-4">
                 <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-bold text-base sm:text-lg text-zinc-100 truncate">
+                        <h3 className="font-bold text-base sm:text-lg text-white truncate font-mono">
                             {coin.baseToken.name}
                         </h3>
-                        <span className="text-xs sm:text-sm text-zinc-400 shrink-0">
+                        <span className="text-xs sm:text-sm text-toxic-500 shrink-0 font-mono">
                             {coin.baseToken.symbol}
                         </span>
                     </div>
                     <div className="flex items-center gap-x-1.5 gap-y-1 flex-wrap">
-                        <span className="text-[9px] sm:text-[10px] font-mono text-zinc-500 bg-zinc-900/50 px-1.5 py-0.5 rounded border border-zinc-800">
+                        <span className="text-[9px] sm:text-[10px] font-mono text-zinc-500 bg-black px-1.5 py-0.5 rounded border border-decay-500">
                             {coin.baseToken.address.slice(0, 4)}...
                             {coin.baseToken.address.slice(-4)}
                         </span>
-                        <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-green-900/30 text-green-400 border border-green-900/50">
-                            SOLANA
+                        <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-toxic-500/10 text-toxic-500 border border-toxic-500/20 font-mono">
+                            SOL
                         </span>
 
                         {/* DEX Badge */}
                         {coin.dexId && (
-                            <span className={`text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 uppercase ${coin.dexId === 'raydium' ? 'bg-blue-900/30 text-blue-400 border-blue-900/50' :
-                                coin.dexId === 'pump' ? 'bg-emerald-900/30 text-emerald-400 border-emerald-900/50' :
-                                    coin.dexId === 'orca' ? 'bg-yellow-900/30 text-yellow-400 border-yellow-900/50' :
-                                        coin.dexId === 'meteora' ? 'bg-pink-900/30 text-pink-400 border-pink-900/50' :
+                            <span className={`text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 uppercase font-mono ${coin.dexId === 'raydium' ? 'bg-blue-900/20 text-blue-400 border-blue-900/40' :
+                                coin.dexId === 'pump' ? 'bg-slime-500/20 text-slime-400 border-slime-500/40' :
+                                    coin.dexId === 'orca' ? 'bg-yellow-900/20 text-yellow-400 border-yellow-900/40' :
+                                        coin.dexId === 'meteora' ? 'bg-pink-900/20 text-pink-400 border-pink-900/40' :
                                             'bg-zinc-800 text-zinc-400 border-zinc-700'
                                 }`}>
                                 {coin.dexId === 'pump' ? 'Pump.fun' : coin.dexId}
@@ -74,55 +74,47 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
                         )}
 
                         {isMostRelevant && (
-                            <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-purple-900/30 text-purple-400 border border-purple-900/50 flex items-center gap-1 shadow-[0_0_10px_rgba(168,85,247,0.2)]">
-                                💎 Most Relevant
+                            <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-slime-500/20 text-slime-400 border border-slime-500/40 flex items-center gap-1 font-mono">
+                                👁️ SIGNAL
                             </span>
                         )}
                         {coin.isHighestFDV && (
-                            <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-yellow-900/30 text-yellow-400 border border-yellow-900/50 flex items-center gap-1">
-                                🏆 High Cap
+                            <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-yellow-900/20 text-yellow-400 border border-yellow-900/40 flex items-center gap-1 font-mono">
+                                🏆 CAP
                             </span>
                         )}
                         {coin.isHighestVolume && (
-                            <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-orange-900/30 text-orange-400 border border-orange-900/50 flex items-center gap-1">
-                                🔥 High Vol
-                            </span>
-                        )}
-                        {coin.matchConfidence !== undefined && (
-                            <span className={`text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded border flex items-center gap-1 ${coin.matchConfidence >= 8 ? 'bg-emerald-900/30 text-emerald-400 border-emerald-900/50' :
-                                coin.matchConfidence >= 5 ? 'bg-yellow-900/30 text-yellow-400 border-yellow-900/50' :
-                                    'bg-red-900/30 text-red-400 border-red-900/50'
-                                }`}>
-                                Conf: {coin.matchConfidence}
+                            <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded bg-orange-900/20 text-orange-400 border border-orange-900/40 flex items-center gap-1 font-mono">
+                                🔥 VOL
                             </span>
                         )}
                     </div>
                 </div>
                 <div className="text-left sm:text-right shrink-0">
-                    <div className="text-lg sm:text-xl font-bold text-zinc-100">
+                    <div className="text-lg sm:text-xl font-bold text-white font-mono tracking-tighter">
                         {formatPrice(coin.priceUsd)}
                     </div>
-                    <div className="text-[10px] sm:text-xs text-zinc-500">Price USD</div>
+                    <div className="text-[10px] sm:text-xs text-zinc-600 font-mono uppercase">Price USD</div>
                 </div>
             </div>
 
             {/* Stats Grid */}
             <div className="grid grid-cols-3 gap-2 mb-4">
-                <div className="bg-zinc-950/50 rounded p-2 border border-zinc-800/50">
-                    <div className="text-[10px] text-zinc-500 uppercase">24h Vol</div>
-                    <div className="text-sm font-medium text-zinc-200">
+                <div className="bg-black/50 rounded p-2 border border-decay-500">
+                    <div className="text-[10px] text-zinc-600 uppercase font-mono">24h Vol</div>
+                    <div className="text-sm font-medium text-zinc-300 font-mono">
                         {formatCurrency(coin.volume?.h24)}
                     </div>
                 </div>
-                <div className="bg-zinc-950/50 rounded p-2 border border-zinc-800/50">
-                    <div className="text-[10px] text-zinc-500 uppercase">Liquidity</div>
-                    <div className="text-sm font-medium text-zinc-200">
+                <div className="bg-black/50 rounded p-2 border border-decay-500">
+                    <div className="text-[10px] text-zinc-600 uppercase font-mono">Liq</div>
+                    <div className="text-sm font-medium text-zinc-300 font-mono">
                         {formatCurrency(coin.liquidity?.usd)}
                     </div>
                 </div>
-                <div className="bg-zinc-950/50 rounded p-2 border border-zinc-800/50">
-                    <div className="text-[10px] text-zinc-500 uppercase">FDV</div>
-                    <div className="text-sm font-medium text-zinc-200">
+                <div className="bg-black/50 rounded p-2 border border-decay-500">
+                    <div className="text-[10px] text-zinc-600 uppercase font-mono">FDV</div>
+                    <div className="text-sm font-medium text-zinc-300 font-mono">
                         {formatCurrency(coin.fdv)}
                     </div>
                 </div>
@@ -133,11 +125,11 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
                 {/* 1. Copy CA (Full Width) */}
                 <button
                     onClick={handleCopy}
-                    className="col-span-2 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 text-xs font-medium text-zinc-300 transition-all border border-zinc-700/50 hover:border-zinc-600 active:scale-[0.98]"
+                    className="col-span-2 flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-[#111] hover:bg-[#1a1a1a] text-xs font-bold text-zinc-400 hover:text-white transition-all border border-decay-500 active:scale-[0.98] uppercase tracking-wider font-mono"
                 >
                     {copied ? (
                         <>
-                            <span className="text-green-400">✓</span> Copied CA
+                            <span className="text-toxic-500">✓</span> Copied
                         </>
                     ) : (
                         <>
@@ -151,9 +143,9 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
                     href={coin.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center px-4 py-3 rounded-xl bg-[#1a1d26] hover:bg-[#20242f] text-sm font-bold text-blue-400 transition-colors border border-blue-900/30 hover:border-blue-500/50 shadow-lg shadow-blue-900/10"
+                    className="flex items-center justify-center px-4 py-3 rounded-md bg-[#1a1d26] hover:bg-black text-sm font-bold text-blue-400 transition-colors border border-blue-900/20 hover:border-blue-500 font-mono uppercase tracking-wide"
                 >
-                    Dexscreener ↗
+                    Dex ↗
                 </a>
 
                 {/* 3. Axiom */}
@@ -161,7 +153,7 @@ export function CoinResultCard({ coin, isMostRelevant }: CoinResultCardProps) {
                     href={`https://axiom.trade/trade/${coin.baseToken.address}?ref=ilyx`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center px-4 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-sm font-bold text-white transition-colors shadow-lg shadow-indigo-500/20 border border-indigo-400/20"
+                    className="flex items-center justify-center px-4 py-3 rounded-md bg-toxic-500 hover:bg-toxic-400 text-sm font-bold text-black transition-colors shadow-[0_0_15px_rgba(204,255,0,0.2)] font-mono uppercase tracking-wide"
                 >
                     Axiom ⚔️
                 </a>
